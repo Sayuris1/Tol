@@ -1,5 +1,22 @@
+go.property("speed", 10)
+
+local function move_circles(circles, amount)
+	for _, value in ipairs(circles) do
+		local newPos = go.get_position(value)
+		newPos = newPos + amount;
+
+		go.set_position(newPos, value)
+	end
+end
+
+local function mirror(in_vector)
+	local normal = vmath.vector3(-1, 0, 0)
+	return in_vector - 2 * (vmath.dot(in_vector, normal)) * normal;
+end
+
 function init(self)
-	print("deneme")
+	self.circles = {factory.create("#circle_factory")}
+	self.move_vector = vmath.vector3(self.speed, -self.speed, 0)
 end
 
 function final(self)
@@ -9,9 +26,7 @@ function final(self)
 end
 
 function update(self, dt)
-	-- Add update code here
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
+	move_circles(self.circles, self.move_vector * dt)
 end
 
 function fixed_update(self, dt)
@@ -23,10 +38,11 @@ function fixed_update(self, dt)
 	-- Remove this function if not needed
 end
 
+local collision_response = hash("collision_response")
 function on_message(self, message_id, message, sender)
-	-- Add message-handling code here
-	-- Learn more: https://defold.com/manuals/message-passing/
-	-- Remove this function if not needed
+	if message_id == collision_response then
+        mirror(in_vector)
+    end
 end
 
 function on_input(self, action_id, action)
