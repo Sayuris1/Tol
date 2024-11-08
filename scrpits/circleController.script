@@ -1,32 +1,4 @@
-go.property("speed", 10)
-
-local function move_circles(circles, amount)
-	for _, value in ipairs(circles) do
-		local newPos = go.get_position(value)
-		newPos = newPos + amount;
-
-		go.set_position(newPos, value)
-	end
-end
-
-local function mirror(in_vector)
-	local normal = vmath.vector3(-1, 0, 0)
-	return in_vector - 2 * (vmath.dot(in_vector, normal)) * normal;
-end
-
-local function set_parent_all(table)
-	for index, value in ipairs(table) do
-		go.set_parent(value, ".")
-	end
-end
-
 function init(self)
-	self.circles = {factory.create("#circle_factory")}
-	set_parent_all(self.circles)
-
-	go.set_position(vmath.vector3(-960, 540, 0))
-
-	self.move_vector = vmath.vector3(self.speed, -self.speed, 0)
 end
 
 function final(self)
@@ -36,7 +8,6 @@ function final(self)
 end
 
 function update(self, dt)
-	move_circles(self.circles, self.move_vector * dt)
 end
 
 function fixed_update(self, dt)
@@ -48,10 +19,16 @@ function fixed_update(self, dt)
 	-- Remove this function if not needed
 end
 
+local trigger_response = hash("trigger_response")
 local hash_mirror = hash("mirror")
 function on_message(self, message_id, message, sender)
-	if message_id == hash_mirror then
-        self.move_vector = mirror(self.move_vector)
+	if message_id == trigger_response then
+        if message.enter then
+            local parent = go.get_parent()
+            if parent then
+                msg.post(parent, hash_mirror)
+            end
+        end
     end
 end
 
