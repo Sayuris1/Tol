@@ -1,4 +1,25 @@
+go.property("speed", 10)
+go.property("index", 0)
+
+local function move_circle(amount)
+    local newPos = go.get_position()
+    newPos = newPos + amount;
+
+    go.set_position(newPos)
+end
+
+local function mirror(in_vector, normal)
+	return in_vector - 2 * (vmath.dot(in_vector, normal)) * normal;
+end
+
+local function add_touchPos(table, pos)
+	for index, value in ipairs(table) do
+		value.touch_pos[#value.touch_pos+1] = pos
+	end
+end
+
 function init(self)
+	self.move_vector = vmath.vector3(self.speed, -self.speed, 0)
 end
 
 function final(self)
@@ -8,6 +29,7 @@ function final(self)
 end
 
 function update(self, dt)
+	move_circle(self.move_vector * dt)
 end
 
 function fixed_update(self, dt)
@@ -20,14 +42,19 @@ function fixed_update(self, dt)
 end
 
 local trigger_response = hash("trigger_response")
-local hash_mirror = hash("mirror")
+local hash_normal = hash("normal")
 function on_message(self, message_id, message, sender)
 	if message_id == trigger_response then
         if message.enter then
-            local parent = go.get_parent()
-            if parent then
-                msg.post(parent, hash_mirror)
-            end
+			if circles1[self.index].touch_pos[1] == nil then
+				add_touchPos(circles1, go.get_position())
+			end
+
+			go.set_position(table.remove(circles1[self.index].touch_pos, 1))
+
+			local url = msg.url(message.other_id)
+			url.fragment = "wallController"
+            self.move_vector = mirror(self.move_vector, go.get(url, hash_normal))
         end
     end
 end
