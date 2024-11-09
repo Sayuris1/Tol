@@ -2,6 +2,19 @@ name: "main"
 instances {
   id: "robot1"
   prototype: "/prefabs/robot.go"
+  component_properties {
+    id: "robotController"
+    properties {
+      id: "speed"
+      value: "250.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+    properties {
+      id: "type_one_speed"
+      value: "50.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+  }
 }
 instances {
   id: "camera"
@@ -12,6 +25,16 @@ instances {
   prototype: "/prefabs/robot.go"
   component_properties {
     id: "robotController"
+    properties {
+      id: "speed"
+      value: "250.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
+    properties {
+      id: "type_one_speed"
+      value: "50.0"
+      type: PROPERTY_TYPE_NUMBER
+    }
     properties {
       id: "team_index"
       value: "2.0"

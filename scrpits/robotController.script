@@ -1,32 +1,49 @@
+local function update_speed_circles(speed, team_index)
+	local circles_table =  circles[team_index];
 
-local function add_circle(team_index, circles_table, init_speed)
-	local circle = factory.create("#circle_factory", nil, nil, {speed = init_speed, index = #circles_table+1, team_index = team_index})
-	circles_table[#circles_table+1] = {circle = circle, touch_pos = {}}
+	for _, value in ipairs(circles_table) do
+		go.set(value.circle, "speed", speed)
+	end
+end
+
+local function add_circle(self, circle_type)
+	local circles_table =  circles[self.team_index];
+
+	local circle = factory.create("#circle_factory", nil, nil, {speed = self.init_speed, index = #circles_table+1, team_index = self.team_index, circle_type = circle_type, parent = msg.url()})
+	local circle_url = msg.url(circle)
+	circle_url.fragment= "circleController"
+	circles_table[#circles_table+1] = {circle =circle_url, touch_pos = {}}
 
 	local pos = 86 * #circles_table
 
-	local pos_sign = team_index == 1 and 1 or -1
+	local pos_sign = self.team_index == 1 and 1 or -1
 	go.set_position(vmath.vector3(pos * pos_sign, -pos, 0), circle)
 	go.set_parent(circle, ".")
+
+	if circle_type == 1 then
+		self.speed = self.speed + self.type_one_speed
+		update_speed_circles(self.speed, self.team_index)
+	end
 end
 
 go.property("speed", 10)
+go.property("type_one_speed", 10)
 go.property("team_index", 1)
 
 circles = {{}, {}}
 
 function init(self)
 
-	add_circle(self.team_index, circles[self.team_index], self.speed)
-	add_circle(self.team_index, circles[self.team_index], self.speed)
-	add_circle(self.team_index, circles[self.team_index], self.speed)
-	add_circle(self.team_index, circles[self.team_index], self.speed)
-	add_circle(self.team_index, circles[self.team_index], self.speed)
-	add_circle(self.team_index, circles[self.team_index], self.speed)
-	add_circle(self.team_index, circles[self.team_index], self.speed)
-	add_circle(self.team_index, circles[self.team_index], self.speed)
-	add_circle(self.team_index, circles[self.team_index], self.speed)
-	add_circle(self.team_index, circles[self.team_index], self.speed)
+	add_circle(self, 1)
+	add_circle(self, 1)
+	add_circle(self, 1)
+	add_circle(self, 1)
+	add_circle(self, 1)
+	add_circle(self, 1)
+	add_circle(self, 1)
+	add_circle(self, 1)
+	add_circle(self, 1)
+	add_circle(self, 1)
 
 	local pos_sign = self.team_index == 1 and 1 or -1
 	go.set_position(vmath.vector3(-960 * pos_sign, 540, 0))

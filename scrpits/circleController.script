@@ -1,6 +1,9 @@
 go.property("speed", 10)
 go.property("index", 0)
 go.property("team_index", 1)
+go.property("parent", msg.url())
+
+go.property("circle_type", 1)
 
 local function move_circle(amount)
     local newPos = go.get_position()
@@ -22,7 +25,7 @@ end
 function init(self)
 
 	local pos_sign = self.team_index == 1 and 1 or -1
-	self.move_vector = vmath.vector3(self.speed * pos_sign, -self.speed, 0)
+	self.move_vector = vmath.vector3(pos_sign, -1, 0)
 end
 
 function final(self)
@@ -32,23 +35,14 @@ function final(self)
 end
 
 function update(self, dt)
-
 end
 
 function fixed_update(self, dt)
-
 	if dt > 1 then
         return
     end
 
-	move_circle(self.move_vector * dt)
-
-	-- This function is called if 'Fixed Update Frequency' is enabled in the Engine section of game.project
-	-- Can be coupled with fixed updates of the physics simulation if 'Use Fixed Timestep' is enabled in
-	-- Physics section of game.project
-	-- Add update code here
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
+	move_circle(self.move_vector * self.speed * dt)
 end
 
 local trigger_response = hash("trigger_response")
