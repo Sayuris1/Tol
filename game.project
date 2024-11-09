@@ -9,6 +9,7 @@ shared_state = 1
 width = 1920
 height = 1080
 high_dpi = 1
+samples = 16
 
 [android]
 input_method = HiddenInputField
@@ -19,4 +20,12 @@ scale_mode = stretch
 [project]
 title = Tol
 dependencies#0 = https://github.com/britzl/defold-orthographic/archive/refs/tags/3.3.2.zip
+
+[engine]
+run_while_iconified = 1
+fixed_update_frequency = 250
+
+[physics]
+use_fixed_timestep = 1
+ray_cast_limit_3d = 0
 
