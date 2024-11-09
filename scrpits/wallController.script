@@ -1,1 +1,14 @@
 go.property("normal", vmath.vector3())
+
+local trigger_response = hash("trigger_response")
+local hash_bullet = hash("bullet")
+function on_message(self, message_id, message, sender)
+	if message_id == trigger_response then
+        if message.enter then
+			if message.other_group == hash_bullet then
+				bullets[message.other_id] = nil
+				go.delete(message.other_id)
+			end
+        end
+    end
+end

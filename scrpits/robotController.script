@@ -12,7 +12,7 @@ local function add_circle(self, circle_type)
 	local circle = factory.create("#circle_factory", nil, nil, {speed = self.init_speed, index = #circles_table+1, team_index = self.team_index, circle_type = circle_type, parent = msg.url()})
 	local circle_url = msg.url(circle)
 	circle_url.fragment= "circleController"
-	circles_table[#circles_table+1] = {circle =circle_url, touch_pos = {}}
+	circles_table[#circles_table+1] = {circle = circle_url, touch_pos = {}}
 
 	local pos = 86 * #circles_table
 
@@ -22,8 +22,12 @@ local function add_circle(self, circle_type)
 
 	if circle_type == 1 then
 		self.speed = self.speed + self.type_one_speed
-		update_speed_circles(self.speed, self.team_index)
+	elseif circle_type == 2 then
+		local weapon = factory.create("#weapon_factory", nil, nil, {team_index = self.team_index})
+		go.set_parent(weapon, circle)
 	end
+
+	update_speed_circles(self.speed, self.team_index)
 end
 
 go.property("speed", 10)
@@ -31,18 +35,14 @@ go.property("type_one_speed", 10)
 go.property("team_index", 1)
 
 circles = {{}, {}}
+bullets = {}
 
 function init(self)
 
+	add_circle(self, 2)
+	add_circle(self, 2)
 	add_circle(self, 1)
-	add_circle(self, 1)
-	add_circle(self, 1)
-	add_circle(self, 1)
-	add_circle(self, 1)
-	add_circle(self, 1)
-	add_circle(self, 1)
-	add_circle(self, 1)
-	add_circle(self, 1)
+	add_circle(self, 2)
 	add_circle(self, 1)
 
 	local pos_sign = self.team_index == 1 and 1 or -1
@@ -59,12 +59,12 @@ function update(self, dt)
 end
 
 function fixed_update(self, dt)
-	-- This function is called if 'Fixed Update Frequency' is enabled in the Engine section of game.project
-	-- Can be coupled with fixed updates of the physics simulation if 'Use Fixed Timestep' is enabled in
-	-- Physics section of game.project
-	-- Add update code here
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
+	for key, value in pairs(bullets) do
+		local pos = go.get_position(key)
+		pos = pos + vmath.vector3(value.speed * dt,0,0)
+
+		go.set_position(pos, key)
+	end
 end
 
 function on_message(self, message_id, message, sender)

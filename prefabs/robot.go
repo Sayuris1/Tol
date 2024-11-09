@@ -13,3 +13,9 @@ embedded_components {
   data: "prototype: \"/prefabs/circle.go\"\n"
   ""
 }
+embedded_components {
+  id: "weapon_factory"
+  type: "factory"
+  data: "prototype: \"/prefabs/weapon.go\"\n"
+  ""
+}
