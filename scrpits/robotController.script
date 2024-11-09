@@ -9,12 +9,12 @@ end
 local function add_circle(self, circle_type)
 	local circles_table =  circles[self.team_index];
 
-	local circle = factory.create("#circle_factory", nil, nil, {speed = self.init_speed, index = #circles_table+1, team_index = self.team_index, circle_type = circle_type, parent = msg.url()})
+	local circle = factory.create("#circle_factory", nil, nil, {speed = self.init_speed, index = #circles_table+1, team_index = self.team_index, circle_type = circle_type, parent = msg.url()}, 0.2)
 	local circle_url = msg.url(circle)
 	circle_url.fragment= "circleController"
 	circles_table[#circles_table+1] = {circle = circle_url, touch_pos = {}}
 
-	local pos = 86 * #circles_table
+	local pos = 17.2 * #circles_table
 
 	local pos_sign = self.team_index == 1 and 1 or -1
 	go.set_position(vmath.vector3(pos * pos_sign, -pos, 0), circle)
@@ -28,6 +28,15 @@ local function add_circle(self, circle_type)
 	elseif circle_type == 3 then
 		local weapon = factory.create("#weapon_factory", nil, nil, {team_index = self.team_index, dir = -1})
 		go.set_parent(weapon, circle)
+	elseif circle_type == 4 then
+		local pos_sign = self.team_index == 1 and 1 or -1
+		local shield = factory.create("#shield_factory", nil, nil, {team_index = self.team_index, parent = circle_url})
+		go.set_position(vmath.vector3(0, 86, 0), shield)
+		go.set_parent(shield, circle)
+
+		local shield = factory.create("#shield_factory", nil, nil, {team_index = self.team_index, parent = circle_url})
+		go.set_position(vmath.vector3(0, -86, 0), shield)
+		go.set_parent(shield, circle)
 	end
 
 	update_speed_circles(self.speed, self.team_index)
@@ -42,16 +51,18 @@ bullets = {}
 
 function init(self)
 
-	add_circle(self, 1)
+	add_circle(self, 4)
 	add_circle(self, 2)
 	add_circle(self, 3)
-	add_circle(self, 1)
+	add_circle(self, 2)
+	add_circle(self, 4)
+	add_circle(self, 2)
 	add_circle(self, 3)
 	add_circle(self, 2)
-	add_circle(self, 1)
+	add_circle(self, 4)
 
 	local pos_sign = self.team_index == 1 and 1 or -1
-	go.set_position(vmath.vector3(-960 * pos_sign, 540, 0))
+	go.set_position(vmath.vector3(-940 * pos_sign, 530, 0))
 end
 
 function final(self)

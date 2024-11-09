@@ -19,3 +19,9 @@ embedded_components {
   data: "prototype: \"/prefabs/weapon.go\"\n"
   ""
 }
+embedded_components {
+  id: "shield_factory"
+  type: "factory"
+  data: "prototype: \"/prefabs/shield.go\"\n"
+  ""
+}

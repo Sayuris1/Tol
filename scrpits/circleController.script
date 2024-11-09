@@ -25,6 +25,7 @@ end
 function init(self)
 	local pos_sign = self.team_index == 1 and 1 or -1
 	self.move_vector = vmath.vector3(pos_sign, -1, 0)
+	self.move_vector = vmath.normalize(self.move_vector)
 
 	self.circles_table =  circles[self.team_index];
 end
@@ -44,6 +45,8 @@ function fixed_update(self, dt)
     end
 
 	move_circle(self.move_vector * self.speed * dt)
+	local dir = self.move_vector
+	go.set_rotation(vmath.quat_from_to(vmath.vector3(1, 0, 0), dir))
 end
 
 local trigger_response = hash("trigger_response")
@@ -53,7 +56,7 @@ function on_message(self, message_id, message, sender)
 	if message_id == trigger_response then
 		if message.other_group == hash_bullet then
 			if message.enter then
-				if bullets[message.other_id].team_index == self.team_index then
+				if bullets[message.other_id] == nil or bullets[message.other_id].team_index == self.team_index then
 					return
 				end
 
