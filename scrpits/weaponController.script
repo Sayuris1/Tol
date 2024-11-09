@@ -1,6 +1,7 @@
 go.property("fire_interval", 3)
 go.property("team_index", 3)
 go.property("bullet_speed", 3)
+go.property("dir", -1)
 
 function init(self)
 	self.bullets = {}
@@ -23,7 +24,13 @@ end
 function fixed_update(self, dt)
 	self.current_fire_interval = self.current_fire_interval - dt
 	if self.current_fire_interval <= 0 then
-		bullets[factory.create("#bullet_factory")] = {speed = self.bullet_speed, team_index = self.team_index}
+		local url = msg.url(go.get_parent())
+		url.fragment = "circleController"
+
+		local dir = go.get(url, "move_vector")
+		dir = vmath.rotate(vmath.quat_rotation_z(45 * self.dir), dir)
+
+		bullets[factory.create("#bullet_factory")] = {move = self.bullet_speed * dir, team_index = self.team_index}
 
 		self.current_fire_interval = self.fire_interval
 	end

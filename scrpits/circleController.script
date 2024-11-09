@@ -2,7 +2,7 @@ go.property("speed", 10)
 go.property("index", 0)
 go.property("team_index", 1)
 go.property("parent", msg.url())
-
+go.property("move_vector", vmath.vector3())
 go.property("circle_type", 1)
 
 local function move_circle(amount)
@@ -62,7 +62,7 @@ function on_message(self, message_id, message, sender)
 
 				for i = 1, self.index, 1 do
 					if self.circles_table[i].circle then
-						go.delete(self.circles_table[i].circle)
+						go.delete(self.circles_table[i].circle, true)
 						self.circles_table[i] = {circle = nil, touch_pos = {}}
 					end
 				end

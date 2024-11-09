@@ -23,7 +23,10 @@ local function add_circle(self, circle_type)
 	if circle_type == 1 then
 		self.speed = self.speed + self.type_one_speed
 	elseif circle_type == 2 then
-		local weapon = factory.create("#weapon_factory", nil, nil, {team_index = self.team_index})
+		local weapon = factory.create("#weapon_factory", nil, nil, {team_index = self.team_index, dir = 1})
+		go.set_parent(weapon, circle)
+	elseif circle_type == 3 then
+		local weapon = factory.create("#weapon_factory", nil, nil, {team_index = self.team_index, dir = -1})
 		go.set_parent(weapon, circle)
 	end
 
@@ -39,9 +42,11 @@ bullets = {}
 
 function init(self)
 
-	add_circle(self, 2)
-	add_circle(self, 2)
 	add_circle(self, 1)
+	add_circle(self, 2)
+	add_circle(self, 3)
+	add_circle(self, 1)
+	add_circle(self, 3)
 	add_circle(self, 2)
 	add_circle(self, 1)
 
@@ -60,10 +65,12 @@ end
 
 function fixed_update(self, dt)
 	for key, value in pairs(bullets) do
-		local pos = go.get_position(key)
-		pos = pos + vmath.vector3(value.speed * dt,0,0)
+		if self.team_index == value.team_index then
+			local pos = go.get_position(key)
+			pos = pos + value.move * dt
 
-		go.set_position(pos, key)
+			go.set_position(pos, key)
+		end
 	end
 end
 
