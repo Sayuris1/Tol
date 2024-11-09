@@ -1,31 +1,35 @@
-go.property("speed", 10)
 
-local function add_circle(circles_table, init_speed)
-	local circle = factory.create("#circle_factory", nil, nil, {speed = init_speed, index = #circles_table+1})
+local function add_circle(team_index, circles_table, init_speed)
+	local circle = factory.create("#circle_factory", nil, nil, {speed = init_speed, index = #circles_table+1, team_index = team_index})
 	circles_table[#circles_table+1] = {circle = circle, touch_pos = {}}
 
 	local pos = 86 * #circles_table
 
-	go.set_position(vmath.vector3(pos, -pos, 0), circle)
+	local pos_sign = team_index == 1 and 1 or -1
+	go.set_position(vmath.vector3(pos * pos_sign, -pos, 0), circle)
 	go.set_parent(circle, ".")
 end
 
+go.property("speed", 10)
+go.property("team_index", 1)
+
+circles = {{}, {}}
+
 function init(self)
-	circles1 = {}
 
-	add_circle(circles1, self.speed)
-	add_circle(circles1, self.speed)
-	add_circle(circles1, self.speed)
-	add_circle(circles1, self.speed)
-	add_circle(circles1, self.speed)
-	add_circle(circles1, self.speed)
-	add_circle(circles1, self.speed)
-	add_circle(circles1, self.speed)
-	add_circle(circles1, self.speed)
-	add_circle(circles1, self.speed)
+	add_circle(self.team_index, circles[self.team_index], self.speed)
+	add_circle(self.team_index, circles[self.team_index], self.speed)
+	add_circle(self.team_index, circles[self.team_index], self.speed)
+	add_circle(self.team_index, circles[self.team_index], self.speed)
+	add_circle(self.team_index, circles[self.team_index], self.speed)
+	add_circle(self.team_index, circles[self.team_index], self.speed)
+	add_circle(self.team_index, circles[self.team_index], self.speed)
+	add_circle(self.team_index, circles[self.team_index], self.speed)
+	add_circle(self.team_index, circles[self.team_index], self.speed)
+	add_circle(self.team_index, circles[self.team_index], self.speed)
 
-	go.set_position(vmath.vector3(-960, 540, 0))
-
+	local pos_sign = self.team_index == 1 and 1 or -1
+	go.set_position(vmath.vector3(-960 * pos_sign, 540, 0))
 end
 
 function final(self)
