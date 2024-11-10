@@ -24,10 +24,6 @@ local function add_touchPos(table, pos)
 end
 
 function init(self)
-	local pos_sign = self.team_index == 1 and 1 or -1
-	self.move_vector = vmath.vector3(pos_sign, -1, 0)
-	self.move_vector = vmath.normalize(self.move_vector)
-
 	self.circles_table =  circles[self.team_index];
 
 	self.enabled = false
@@ -69,12 +65,15 @@ function on_message(self, message_id, message, sender)
 				bullets[message.other_id] = nil
 				go.delete(message.other_id)
 
-				for i = 1, self.index, 1 do
-					if self.circles_table[i].circle then
-						go.delete(self.circles_table[i].circle, true)
-						self.circles_table[i] = {circle = nil, touch_pos = {}}
-					end
-				end
+				go.delete(self.circles_table[self.index].circle, true)
+				self.circles_table[self.index] = {circle = nil, touch_pos = {}}
+
+				--for i = 1, self.index, 1 do
+					--if self.circles_table[i].circle then
+						--go.delete(self.circles_table[i].circle, true)
+						--self.circles_table[i] = {circle = nil, touch_pos = {}}
+					--end
+				--end
 			end
 		else
 			if message.enter then

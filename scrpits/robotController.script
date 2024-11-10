@@ -6,18 +6,28 @@ local function update_speed_circles(speed, team_index)
 	end
 end
 
+local function update_move_vectors(move_vector, team_index)
+	local circles_table =  circles[team_index];
+
+	for index, value in ipairs(circles_table) do
+		go.set(value.circle, "move_vector", move_vector)
+
+		local pos = 13.7 * index
+		go.set_position(move_vector * pos, value.circle)
+	end
+end
+
 local function add_circle(self, circle_type)
 	local circles_table =  circles[self.team_index];
 
-	local circle = factory.create("#circle_factory", nil, nil, {speed = self.init_speed, index = #circles_table+1, team_index = self.team_index, circle_type = circle_type, parent = msg.url()}, 0.2)
+	local circle = factory.create("#circle_factory", nil, nil, {speed = self.init_speed, index = #circles_table+1, team_index = self.team_index, circle_type = circle_type, parent = msg.url(), move_vector = self.move_vector}, 0.1)
 	local circle_url = msg.url(circle)
 	circle_url.fragment= "circleController"
 	circles_table[#circles_table+1] = {circle = circle_url, touch_pos = {}}
 
-	local pos = 17.2 * #circles_table
+	local pos = 13.7 * #circles_table
 
-	local pos_sign = self.team_index == 1 and 1 or -1
-	go.set_position(vmath.vector3(pos * pos_sign, -pos, 0), circle)
+	go.set_position(self.move_vector * pos, circle)
 	go.set_parent(circle, ".")
 
 	if circle_type == 1 then
@@ -28,7 +38,7 @@ local function add_circle(self, circle_type)
 		go.set_parent(weapon, circle)
 
 	elseif circle_type == 3 then
-		local weapon = factory.create("#weapon_factory", nil, nil, {team_index = self.team_index, dir = -1})
+		local weapon = factory.create("#weapon_factory", vmath.vector3(0), nil, {team_index = self.team_index, dir = -1})
 		go.set_parent(weapon, circle)
 
 	elseif circle_type == 4 then
@@ -55,7 +65,11 @@ bullets = {}
 
 function init(self)
 	local pos_sign = self.team_index == 1 and 1 or -1
-	go.set_position(vmath.vector3(-940 * pos_sign, 530, 0))
+	go.set_position(vmath.vector3(-950 * pos_sign, 520, 0))
+
+	self.move_vector = vmath.vector3(pos_sign, -1, 0)
+	self.move_vector = vmath.normalize(self.move_vector)
+
 end
 
 function final(self)
@@ -95,6 +109,14 @@ function on_message(self, message_id, message, sender)
 
 	elseif message_id == hash("add_shield") then
 		add_circle(self, 4)
+
+	elseif message_id == hash("up_move_vector") then
+		self.move_vector = vmath.rotate(vmath.quat_rotation_z(math.rad(5)), self.move_vector)
+		update_move_vectors(self.move_vector, self.team_index)
+
+	elseif message_id == hash("down_move_vector") then
+		self.move_vector = vmath.rotate(vmath.quat_rotation_z(math.rad(-5)), self.move_vector)
+		update_move_vectors(self.move_vector, self.team_index)
 	end
 end
 

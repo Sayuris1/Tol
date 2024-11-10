@@ -46,6 +46,12 @@ function on_message(self, message_id, message, sender)
 		elseif message.id == hash("/weapon_right") then
 			msg.post(self.url_robot1, "add_weapon_right")
 
+		elseif message.id == hash("/vector_up") then
+			msg.post(self.url_robot1, "up_move_vector")
+
+		elseif message.id == hash("/vector_down") then
+			msg.post(self.url_robot1, "down_move_vector")
+
 		end
 	end
 end
