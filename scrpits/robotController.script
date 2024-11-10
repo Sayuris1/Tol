@@ -14,6 +14,7 @@ local function update_move_vectors(move_vector, team_index)
 
 		local pos = 13.7 * index
 		go.set_position(move_vector * pos, value.circle)
+		go.set_rotation(vmath.quat_from_to(vmath.vector3(1, 0, 0), move_vector), value.circle)
 	end
 end
 
@@ -42,7 +43,6 @@ local function add_circle(self, circle_type)
 		go.set_parent(weapon, circle)
 
 	elseif circle_type == 4 then
-		local pos_sign = self.team_index == 1 and 1 or -1
 		local shield = factory.create("#shield_factory", nil, nil, {team_index = self.team_index, parent = circle_url})
 		go.set_position(vmath.vector3(0, 86, 0), shield)
 		go.set_parent(shield, circle)
@@ -65,7 +65,7 @@ bullets = {}
 
 function init(self)
 	local pos_sign = self.team_index == 1 and 1 or -1
-	go.set_position(vmath.vector3(-950 * pos_sign, 520, 0))
+	go.set_position(vmath.vector3(-940 * pos_sign, 520, 0))
 
 	self.move_vector = vmath.vector3(pos_sign, -1, 0)
 	self.move_vector = vmath.normalize(self.move_vector)
