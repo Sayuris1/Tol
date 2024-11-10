@@ -4,6 +4,7 @@ go.property("team_index", 1)
 go.property("parent", msg.url())
 go.property("move_vector", vmath.vector3())
 go.property("circle_type", 1)
+go.property("enabled", false)
 
 local function move_circle(amount)
     local newPos = go.get_position()
@@ -28,6 +29,11 @@ function init(self)
 	self.move_vector = vmath.normalize(self.move_vector)
 
 	self.circles_table =  circles[self.team_index];
+
+	self.enabled = false
+
+	local dir = self.move_vector
+	go.set_rotation(vmath.quat_from_to(vmath.vector3(1, 0, 0), dir))
 end
 
 function final(self)
@@ -40,7 +46,7 @@ function update(self, dt)
 end
 
 function fixed_update(self, dt)
-	if dt > 1 then
+	if dt > 1 or not self.enabled then
         return
     end
 

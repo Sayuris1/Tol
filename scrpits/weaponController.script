@@ -22,10 +22,15 @@ function update(self, dt)
 end
 
 function fixed_update(self, dt)
+	local url = msg.url(go.get_parent())
+	url.fragment = "circleController"
+
+	if not go.get(url, "enabled") then
+		return
+	end
+
 	self.current_fire_interval = self.current_fire_interval - dt
 	if self.current_fire_interval <= 0 then
-		local url = msg.url(go.get_parent())
-		url.fragment = "circleController"
 
 		local dir = go.get(url, "move_vector")
 		dir = vmath.rotate(vmath.quat_rotation_z(math.rad(45 * self.dir)), dir)

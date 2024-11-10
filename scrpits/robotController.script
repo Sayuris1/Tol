@@ -40,6 +40,7 @@ local function add_circle(self, circle_type)
 	end
 
 	update_speed_circles(self.speed, self.team_index)
+	go.set(circle_url, "enabled", false)
 end
 
 go.property("speed", 10)
@@ -86,7 +87,11 @@ function fixed_update(self, dt)
 end
 
 function on_message(self, message_id, message, sender)
-
+	if message_id == hash("enable_all_circles") then
+		for index, value in ipairs(circles[self.team_index]) do
+			go.set(value.circle, "enabled", true)
+		end
+	end
 end
 
 function on_input(self, action_id, action)

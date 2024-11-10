@@ -3,6 +3,9 @@ local cursor = require "in.cursor"
 
 function init(self)
 	msg.post(".", "acquire_input_focus")
+
+	self.url_robot1 = msg.url(nil, "/robot1", "robotController")
+	self.url_robot2 = msg.url(nil, "/robot2", "robotController")
 end
 
 function final(self)
@@ -29,7 +32,9 @@ end
 function on_message(self, message_id, message, sender)
 	if message_id == cursor.CLICKED then
 		if message.id == hash("/add_speed") then
-			pprint("speed")
+		elseif message.id == hash("/start") then
+			msg.post(self.url_robot1, "enable_all_circles")
+			msg.post(self.url_robot2, "enable_all_circles")
 		end
 	end
 end
