@@ -21,6 +21,10 @@ end
 local function add_auto_shields(self)
 	self.current_cycles_without_shield = self.current_cycles_without_shield + 1
 
+	if self.shield_per_circle <= 0 then
+		return
+	end
+
 	if self.current_cycles_without_shield >= self.shield_per_circle then
 		add_circle(self, 4)
 	end
@@ -87,7 +91,7 @@ function init(self)
 	self.move_vector = vmath.normalize(self.move_vector)
 
 	self.current_cycles_without_shield = 0
-	self.shield_per_circle = 9999
+	self.shield_per_circle = 0
 end
 
 function final(self)
