@@ -31,10 +31,21 @@ end
 
 function on_message(self, message_id, message, sender)
 	if message_id == cursor.CLICKED then
-		if message.id == hash("/add_speed") then
+		if message.id == hash("/speed") then
+			msg.post(self.url_robot1, "add_speed")
 		elseif message.id == hash("/start") then
 			msg.post(self.url_robot1, "enable_all_circles")
 			msg.post(self.url_robot2, "enable_all_circles")
+
+		elseif message.id == hash("/shield") then
+			msg.post(self.url_robot1, "add_shield")
+
+		elseif message.id == hash("/weapon_left") then
+			msg.post(self.url_robot1, "add_weapon_left")
+
+		elseif message.id == hash("/weapon_right") then
+			msg.post(self.url_robot1, "add_weapon_right")
+
 		end
 	end
 end
