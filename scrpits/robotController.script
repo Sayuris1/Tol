@@ -18,7 +18,15 @@ local function update_move_vectors(move_vector, team_index)
 	end
 end
 
-local function add_circle(self, circle_type)
+local function add_auto_shields(self)
+	self.current_cycles_without_shield = self.current_cycles_without_shield + 1
+
+	if self.current_cycles_without_shield >= self.shield_per_circle then
+		add_circle(self, 4)
+	end
+end
+
+function add_circle(self, circle_type)
 	local circles_table =  circles[self.team_index];
 
 	local circle = factory.create("#circle_factory", nil, nil, {speed = self.init_speed, index = #circles_table+1, team_index = self.team_index, circle_type = circle_type, parent = msg.url(), move_vector = self.move_vector}, 0.1)
@@ -34,13 +42,19 @@ local function add_circle(self, circle_type)
 	if circle_type == 1 then
 		self.speed = self.speed + self.type_one_speed
 
+		add_auto_shields(self)
+
 	elseif circle_type == 2 then
 		local weapon = factory.create("#weapon_factory", vmath.vector3(0), nil, {team_index = self.team_index, dir = 1})
 		go.set_parent(weapon, circle)
 
+		add_auto_shields(self)
+
 	elseif circle_type == 3 then
 		local weapon = factory.create("#weapon_factory", vmath.vector3(0), nil, {team_index = self.team_index, dir = -1})
 		go.set_parent(weapon, circle)
+
+		add_auto_shields(self)
 
 	elseif circle_type == 4 then
 		local shield = factory.create("#shield_factory", nil, nil, {team_index = self.team_index, parent = circle_url})
@@ -50,6 +64,8 @@ local function add_circle(self, circle_type)
 		local shield = factory.create("#shield_factory", nil, nil, {team_index = self.team_index, parent = circle_url})
 		go.set_position(vmath.vector3(0, -86, 0), shield)
 		go.set_parent(shield, circle)
+
+		self.current_cycles_without_shield = 0
 	end
 
 	update_speed_circles(self.speed, self.team_index)
@@ -70,6 +86,8 @@ function init(self)
 	self.move_vector = vmath.vector3(pos_sign, -1, 0)
 	self.move_vector = vmath.normalize(self.move_vector)
 
+	self.current_cycles_without_shield = 0
+	self.shield_per_circle = 9999
 end
 
 function final(self)
@@ -127,9 +145,7 @@ function on_message(self, message_id, message, sender)
 
 	elseif message_id == hash("add_shield") then
 		if message.value then
-				for i = 1, go.get(message.value, "value"), 1 do
-					add_circle(self, 4)
-				end
+			self.shield_per_circle = go.get(message.value, "value")
 			return
 		end
 		add_circle(self, 4)

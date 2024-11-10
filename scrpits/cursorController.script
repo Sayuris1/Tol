@@ -54,9 +54,11 @@ function on_message(self, message_id, message, sender)
 
 		elseif message.id == hash("/shield_up_down/up") then
 			msg.post(msg.url(nil, "/shield_up_down/script", "buttonController"), "up")
+			msg.post(self.url_robot2, "add_shield", {value = msg.url(nil, "/shield_up_down/script", "buttonController")})
 
 		elseif message.id == hash("/shield_up_down/down") then
 			msg.post(msg.url(nil, "/shield_up_down/script", "buttonController"), "down")
+			msg.post(self.url_robot2, "add_shield", {value = msg.url(nil, "/shield_up_down/script", "buttonController")})
 
 		elseif message.id == hash("/speed_up_down/up") then
 			msg.post(msg.url(nil, "/speed_up_down/script", "buttonController"), "up")
