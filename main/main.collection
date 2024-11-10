@@ -98,13 +98,9 @@ scale_along_z: 0
 embedded_instances {
   id: "Walls"
   children: "wall_down_left"
-  children: "wall_down_left1"
-  children: "wall_middle_left"
   children: "wall_middle_left1"
   children: "wall_right_left"
-  children: "wall_right_left1"
   children: "wall_up_left"
-  children: "wall_up_left1"
   data: ""
 }
 embedded_instances {
@@ -139,7 +135,7 @@ embedded_instances {
   "    count: 3\\n"
   "  }\\n"
   "  data: 10.0\\n"
-  "  data: 550.0\\n"
+  "  data: 950.0\\n"
   "  data: 10.0\\n"
   "}\\n"
   "\"\n"
@@ -161,128 +157,12 @@ embedded_instances {
   "}\n"
   ""
   position {
-    x: -480.0
     y: 540.0
   }
   rotation {
     z: 0.70710677
     w: 0.70710677
   }
-}
-embedded_instances {
-  id: "wall_down_left1"
-  data: "components {\n"
-  "  id: \"wallController\"\n"
-  "  component: \"/scrpits/wallController.script\"\n"
-  "  properties {\n"
-  "    id: \"normal\"\n"
-  "    value: \"0.0, -1.0, 0.0\"\n"
-  "    type: PROPERTY_TYPE_VECTOR3\n"
-  "  }\n"
-  "}\n"
-  "embedded_components {\n"
-  "  id: \"collisionobject\"\n"
-  "  type: \"collisionobject\"\n"
-  "  data: \"type: COLLISION_OBJECT_TYPE_TRIGGER\\n"
-  "mass: 0.0\\n"
-  "friction: 0.1\\n"
-  "restitution: 0.5\\n"
-  "group: \\\"middle\\\"\\n"
-  "mask: \\\"circle\\\"\\n"
-  "mask: \\\"bullet\\\"\\n"
-  "embedded_collision_shape {\\n"
-  "  shapes {\\n"
-  "    shape_type: TYPE_BOX\\n"
-  "    position {\\n"
-  "    }\\n"
-  "    rotation {\\n"
-  "    }\\n"
-  "    index: 0\\n"
-  "    count: 3\\n"
-  "  }\\n"
-  "  data: 10.0\\n"
-  "  data: 550.0\\n"
-  "  data: 10.0\\n"
-  "}\\n"
-  "\"\n"
-  "}\n"
-  "embedded_components {\n"
-  "  id: \"sprite\"\n"
-  "  type: \"sprite\"\n"
-  "  data: \"default_animation: \\\"anim\\\"\\n"
-  "material: \\\"/builtins/materials/sprite.material\\\"\\n"
-  "size {\\n"
-  "  x: 32.0\\n"
-  "  y: 32.0\\n"
-  "}\\n"
-  "textures {\\n"
-  "  sampler: \\\"texture_sampler\\\"\\n"
-  "  texture: \\\"/builtins/graphics/particle_blob.tilesource\\\"\\n"
-  "}\\n"
-  "\"\n"
-  "}\n"
-  ""
-  position {
-    x: 494.0
-    y: 540.0
-  }
-  rotation {
-    z: 0.70710677
-    w: 0.70710677
-  }
-}
-embedded_instances {
-  id: "wall_middle_left"
-  data: "components {\n"
-  "  id: \"wallController\"\n"
-  "  component: \"/scrpits/wallController.script\"\n"
-  "  properties {\n"
-  "    id: \"normal\"\n"
-  "    value: \"-1.0, 0.0, 0.0\"\n"
-  "    type: PROPERTY_TYPE_VECTOR3\n"
-  "  }\n"
-  "}\n"
-  "embedded_components {\n"
-  "  id: \"collisionobject\"\n"
-  "  type: \"collisionobject\"\n"
-  "  data: \"type: COLLISION_OBJECT_TYPE_TRIGGER\\n"
-  "mass: 0.0\\n"
-  "friction: 0.1\\n"
-  "restitution: 0.5\\n"
-  "group: \\\"middle\\\"\\n"
-  "mask: \\\"circle\\\"\\n"
-  "embedded_collision_shape {\\n"
-  "  shapes {\\n"
-  "    shape_type: TYPE_BOX\\n"
-  "    position {\\n"
-  "    }\\n"
-  "    rotation {\\n"
-  "    }\\n"
-  "    index: 0\\n"
-  "    count: 3\\n"
-  "  }\\n"
-  "  data: 10.0\\n"
-  "  data: 550.0\\n"
-  "  data: 10.0\\n"
-  "}\\n"
-  "\"\n"
-  "}\n"
-  "embedded_components {\n"
-  "  id: \"sprite\"\n"
-  "  type: \"sprite\"\n"
-  "  data: \"default_animation: \\\"anim\\\"\\n"
-  "material: \\\"/builtins/materials/sprite.material\\\"\\n"
-  "size {\\n"
-  "  x: 32.0\\n"
-  "  y: 32.0\\n"
-  "}\\n"
-  "textures {\\n"
-  "  sampler: \\\"texture_sampler\\\"\\n"
-  "  texture: \\\"/builtins/graphics/particle_blob.tilesource\\\"\\n"
-  "}\\n"
-  "\"\n"
-  "}\n"
-  ""
 }
 embedded_instances {
   id: "wall_middle_left1"
@@ -338,7 +218,7 @@ embedded_instances {
   "}\n"
   ""
   position {
-    x: 974.0
+    x: 960.0
   }
 }
 embedded_instances {
@@ -399,62 +279,6 @@ embedded_instances {
   }
 }
 embedded_instances {
-  id: "wall_right_left1"
-  data: "components {\n"
-  "  id: \"wallController\"\n"
-  "  component: \"/scrpits/wallController.script\"\n"
-  "  properties {\n"
-  "    id: \"normal\"\n"
-  "    value: \"-1.0, 0.0, 0.0\"\n"
-  "    type: PROPERTY_TYPE_VECTOR3\n"
-  "  }\n"
-  "}\n"
-  "embedded_components {\n"
-  "  id: \"collisionobject\"\n"
-  "  type: \"collisionobject\"\n"
-  "  data: \"type: COLLISION_OBJECT_TYPE_TRIGGER\\n"
-  "mass: 0.0\\n"
-  "friction: 0.1\\n"
-  "restitution: 0.5\\n"
-  "group: \\\"middle\\\"\\n"
-  "mask: \\\"circle\\\"\\n"
-  "embedded_collision_shape {\\n"
-  "  shapes {\\n"
-  "    shape_type: TYPE_BOX\\n"
-  "    position {\\n"
-  "    }\\n"
-  "    rotation {\\n"
-  "    }\\n"
-  "    index: 0\\n"
-  "    count: 3\\n"
-  "  }\\n"
-  "  data: 10.0\\n"
-  "  data: 550.0\\n"
-  "  data: 10.0\\n"
-  "}\\n"
-  "\"\n"
-  "}\n"
-  "embedded_components {\n"
-  "  id: \"sprite\"\n"
-  "  type: \"sprite\"\n"
-  "  data: \"default_animation: \\\"anim\\\"\\n"
-  "material: \\\"/builtins/materials/sprite.material\\\"\\n"
-  "size {\\n"
-  "  x: 32.0\\n"
-  "  y: 32.0\\n"
-  "}\\n"
-  "textures {\\n"
-  "  sampler: \\\"texture_sampler\\\"\\n"
-  "  texture: \\\"/builtins/graphics/particle_blob.tilesource\\\"\\n"
-  "}\\n"
-  "\"\n"
-  "}\n"
-  ""
-  position {
-    x: 14.0
-  }
-}
-embedded_instances {
   id: "wall_up_left"
   data: "components {\n"
   "  id: \"wallController\"\n"
@@ -486,7 +310,7 @@ embedded_instances {
   "    count: 3\\n"
   "  }\\n"
   "  data: 10.0\\n"
-  "  data: 550.0\\n"
+  "  data: 950.0\\n"
   "  data: 10.0\\n"
   "}\\n"
   "\"\n"
@@ -508,69 +332,6 @@ embedded_instances {
   "}\n"
   ""
   position {
-    x: -480.0
-    y: -540.0
-  }
-  rotation {
-    z: 0.70710677
-    w: 0.70710677
-  }
-}
-embedded_instances {
-  id: "wall_up_left1"
-  data: "components {\n"
-  "  id: \"wallController\"\n"
-  "  component: \"/scrpits/wallController.script\"\n"
-  "  properties {\n"
-  "    id: \"normal\"\n"
-  "    value: \"0.0, 1.0, 0.0\"\n"
-  "    type: PROPERTY_TYPE_VECTOR3\n"
-  "  }\n"
-  "}\n"
-  "embedded_components {\n"
-  "  id: \"collisionobject\"\n"
-  "  type: \"collisionobject\"\n"
-  "  data: \"type: COLLISION_OBJECT_TYPE_TRIGGER\\n"
-  "mass: 0.0\\n"
-  "friction: 0.1\\n"
-  "restitution: 0.5\\n"
-  "group: \\\"middle\\\"\\n"
-  "mask: \\\"circle\\\"\\n"
-  "mask: \\\"bullet\\\"\\n"
-  "embedded_collision_shape {\\n"
-  "  shapes {\\n"
-  "    shape_type: TYPE_BOX\\n"
-  "    position {\\n"
-  "    }\\n"
-  "    rotation {\\n"
-  "    }\\n"
-  "    index: 0\\n"
-  "    count: 3\\n"
-  "  }\\n"
-  "  data: 10.0\\n"
-  "  data: 550.0\\n"
-  "  data: 10.0\\n"
-  "}\\n"
-  "\"\n"
-  "}\n"
-  "embedded_components {\n"
-  "  id: \"sprite\"\n"
-  "  type: \"sprite\"\n"
-  "  data: \"default_animation: \\\"anim\\\"\\n"
-  "material: \\\"/builtins/materials/sprite.material\\\"\\n"
-  "size {\\n"
-  "  x: 32.0\\n"
-  "  y: 32.0\\n"
-  "}\\n"
-  "textures {\\n"
-  "  sampler: \\\"texture_sampler\\\"\\n"
-  "  texture: \\\"/builtins/graphics/particle_blob.tilesource\\\"\\n"
-  "}\\n"
-  "\"\n"
-  "}\n"
-  ""
-  position {
-    x: 494.0
     y: -540.0
   }
   rotation {
