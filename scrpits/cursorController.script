@@ -52,6 +52,47 @@ function on_message(self, message_id, message, sender)
 		elseif message.id == hash("/vector_down") then
 			msg.post(self.url_robot1, "down_move_vector")
 
+		elseif message.id == hash("/shield_up_down/up") then
+			msg.post(msg.url(nil, "/shield_up_down/script", "buttonController"), "up")
+
+		elseif message.id == hash("/shield_up_down/down") then
+			msg.post(msg.url(nil, "/shield_up_down/script", "buttonController"), "down")
+
+		elseif message.id == hash("/speed_up_down/up") then
+			msg.post(msg.url(nil, "/speed_up_down/script", "buttonController"), "up")
+
+		elseif message.id == hash("/speed_up_down/down") then
+			msg.post(msg.url(nil, "/speed_up_down/script", "buttonController"), "down")
+
+		elseif message.id == hash("/weapon_left_up_down/up") then
+			msg.post(msg.url(nil, "/weapon_left_up_down/script", "buttonController"), "up")
+
+		elseif message.id == hash("/weapon_left_up_down/down") then
+			msg.post(msg.url(nil, "/weapon_left_up_down/script", "buttonController"), "down")
+
+		elseif message.id == hash("/weapon_right_up_down/up") then
+			msg.post(msg.url(nil, "/weapon_right_up_down/script", "buttonController"), "up")
+
+		elseif message.id == hash("/weapon_right_up_down/down") then
+			msg.post(msg.url(nil, "/weapon_right_up_down/script", "buttonController"), "down")
+
+		elseif message.id == hash("/shield_text") then
+			msg.post(self.url_robot2, "add_shield", {value = msg.url(nil, "/shield_up_down/script", "buttonController")})
+
+		elseif message.id == hash("/speed_text") then
+			msg.post(self.url_robot2, "add_speed", {value = msg.url(nil, "/speed_up_down/script", "buttonController")})
+
+		elseif message.id == hash("/weapon_left_text") then
+			msg.post(self.url_robot2, "add_weapon_left", {value = msg.url(nil, "/weapon_left_up_down/script", "buttonController")})
+
+		elseif message.id == hash("/weapon_right_text") then
+			msg.post(self.url_robot2, "add_weapon_right", {value = msg.url(nil, "/weapon_right_up_down/script", "buttonController")})
+
+		elseif message.id == hash("/alig_up") then
+			msg.post(self.url_robot2, "up_move_vector")
+
+		elseif message.id == hash("/alig_down") then
+			msg.post(self.url_robot2, "down_move_vector")
 		end
 	end
 end

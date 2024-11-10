@@ -4,4 +4,10 @@ images {
 images {
   image: "/assets/pngs/shield.png"
 }
+images {
+  image: "/assets/pngs/negative.png"
+}
+images {
+  image: "/assets/pngs/pozitive.png"
+}
 extrude_borders: 2

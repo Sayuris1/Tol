@@ -99,15 +99,39 @@ function on_message(self, message_id, message, sender)
 		end
 
 	elseif message_id == hash("add_speed") then
+		if message.value then
+				for i = 1, go.get(message.value, "value"), 1 do
+					add_circle(self, 1)
+				end
+			return
+		end
 		add_circle(self, 1)
 
 	elseif message_id == hash("add_weapon_right") then
+		if message.value then
+				for i = 1, go.get(message.value, "value"), 1 do
+					add_circle(self, 2)
+				end
+			return
+		end
 		add_circle(self, 2)
 
 	elseif message_id == hash("add_weapon_left") then
+		if message.value then
+				for i = 1, go.get(message.value, "value"), 1 do
+					add_circle(self, 3)
+				end
+			return
+		end
 		add_circle(self, 3)
 
 	elseif message_id == hash("add_shield") then
+		if message.value then
+				for i = 1, go.get(message.value, "value"), 1 do
+					add_circle(self, 4)
+				end
+			return
+		end
 		add_circle(self, 4)
 
 	elseif message_id == hash("up_move_vector") then
