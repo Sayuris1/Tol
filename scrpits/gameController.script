@@ -3,16 +3,17 @@ go.property("runing", false)
 
 function init(self)
 	circles = {{}, {}}
+	hidden_index = 2
 
 	self.current_play_time = self.play_time
 
 	self.player1 = 0
 	self.player2 = 0
 
-	self.player1_team_index = 1
-	self.player2_team_index = 2
-
 	msg.post("won_state", "disable")
+
+	self.url_robot1 = msg.url(nil, "/robot1", "robotController")
+	self.url_robot2 = msg.url(nil, "/robot2", "robotController")
 end
 
 function final(self)
@@ -23,9 +24,9 @@ function update(self, dt)
 		self.current_play_time = self.current_play_time - dt
 
 		if self.current_play_time <= 0 then
-			if #circles[self.player1_team_index] < #circles[self.player2_team_index] then
+			if circles[1].size < circles[2].size then
 				self.player2 = self.player2 + 1
-			elseif #circles[self.player1_team_index] == #circles[self.player2_team_index] then
+			elseif circles[1].size == circles[2].size then
 				self.player1 = self.player1 + 1
 				self.player2 = self.player2 + 1
 			else
@@ -47,9 +48,20 @@ function fixed_update(self, dt)
 end
 
 function on_message(self, message_id, message, sender)
-	-- Add message-handling code here
-	-- Learn more: https://defold.com/manuals/message-passing/
-	-- Remove this function if not needed
+	if message_id == hash("build_state") then
+		circles[3], circles[4] = circles[1], circles[2]
+		circles[1], circles[2] = {}, {}
+
+		if hidden_index == 2 then
+			hidden_index = 1
+		else
+			hidden_index = 2
+		end
+
+		msg.post(self.url_robot1, "build_state")
+		msg.post(self.url_robot2, "build_state")
+		msg.post("/cursor#cursorController", "swap_url")
+	end
 end
 
 function on_input(self, action_id, action)

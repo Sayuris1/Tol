@@ -30,7 +30,9 @@ function fixed_update(self, dt)
 end
 
 function on_message(self, message_id, message, sender)
-	if message_id == cursor.CLICKED then
+	if message_id == hash("swap_url") then
+		self.url_robot1, self.url_robot2 = self.url_robot2, self.url_robot1
+	elseif message_id == cursor.CLICKED then
 		if message.id == hash("/speed") then
 			msg.post(self.url_robot1, "add_speed")
 		elseif message.id == hash("/start") then
@@ -95,6 +97,12 @@ function on_message(self, message_id, message, sender)
 
 		elseif message.id == hash("/alig_down") then
 			msg.post(self.url_robot2, "down_move_vector")
+
+		elseif message.id == hash("/alig_down") then
+			msg.post(self.url_robot2, "down_move_vector")
+
+		elseif message.id == hash("/won_state") then
+			msg.post("/game_controller#gameController", "build_state")
 		end
 	end
 end

@@ -103,11 +103,13 @@ function add_circle(self, circle_type)
 	update_speed_circles(self.speed, self.team_index)
 	go.set(circle_url, "enabled", false)
 
-	if self.team_index == 2 then
+	if self.team_index == hidden_index then
 		for _, value in ipairs(self.disable_list) do
 			msg.post(value, "disable")
 		end
 	end
+
+	circles_table.size = #circles_table
 end
 
 go.property("speed", 10)
@@ -218,6 +220,32 @@ function on_message(self, message_id, message, sender)
 
 		self.alignment_angle = self.alignment_angle - 5
 		label.set_text("alignment#label", "Alignment Angle: " .. self.alignment_angle)
+
+	elseif message_id == hash("build_state") then
+		for _, value in ipairs(self.disable_list) do
+			if go.exists(value) then
+				go.delete(value, true)
+			end
+		end
+		self.disable_list = {}
+
+		for key, value in pairs(bullets) do
+			if go.exists(key) then
+				go.delete(key, true)
+			end
+		end
+		bullets = {}
+
+		local replace_index
+		if self.team_index == 1 then
+			replace_index = 3
+		else
+			replace_index = 4
+		end
+
+		for index, value in ipairs(circles[replace_index]) do
+			add_circle(self, value.circle_type)
+		end
 	end
 end
 
