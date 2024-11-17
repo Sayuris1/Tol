@@ -1,0 +1,71 @@
+go.property("play_time", 10)
+go.property("runing", false)
+
+function init(self)
+	circles = {{}, {}}
+
+	self.current_play_time = self.play_time
+
+	self.player1 = 0
+	self.player2 = 0
+
+	self.player1_team_index = 1
+	self.player2_team_index = 2
+
+	msg.post("won_state", "disable")
+end
+
+function final(self)
+end
+
+function update(self, dt)
+	if self.runing then
+		self.current_play_time = self.current_play_time - dt
+
+		if self.current_play_time <= 0 then
+			if #circles[self.player1_team_index] < #circles[self.player2_team_index] then
+				self.player2 = self.player2 + 1
+			elseif #circles[self.player1_team_index] == #circles[self.player2_team_index] then
+				self.player1 = self.player1 + 1
+				self.player2 = self.player2 + 1
+			else
+				self.player1 = self.player1 + 1
+			end
+
+			msg.post("won_state", "enable")
+
+			label.set_text("won_state#player1", self.player1)
+			label.set_text("won_state#player2", self.player2)
+
+			self.runing = false
+			self.current_play_time = self.play_time
+		end
+	end
+end
+
+function fixed_update(self, dt)
+end
+
+function on_message(self, message_id, message, sender)
+	-- Add message-handling code here
+	-- Learn more: https://defold.com/manuals/message-passing/
+	-- Remove this function if not needed
+end
+
+function on_input(self, action_id, action)
+	-- Add input-handling code here. The game object this script is attached to
+	-- must have acquired input focus:
+	--
+	--    msg.post(".", "acquire_input_focus")
+	--
+	-- All mapped input bindings will be received. Mouse and touch input will
+	-- be received regardless of where on the screen it happened.
+	-- Learn more: https://defold.com/manuals/input/
+	-- Remove this function if not needed
+end
+
+function on_reload(self)
+	-- Add reload-handling code here
+	-- Learn more: https://defold.com/manuals/hot-reload/
+	-- Remove this function if not needed
+end
