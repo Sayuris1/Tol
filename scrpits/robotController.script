@@ -222,6 +222,13 @@ function on_message(self, message_id, message, sender)
 		label.set_text("alignment#label", "Alignment Angle: " .. self.alignment_angle)
 
 	elseif message_id == hash("build_state") then
+		local pos_sign = self.team_index ~= hidden_index and 1 or -1
+		go.set_position(vmath.vector3(-940 * pos_sign, 520, 0))
+
+		self.move_vector.x = -self.move_vector.x
+		self.move_vector = vmath.normalize(self.move_vector)
+		update_move_vectors(self.move_vector, self.team_index)
+
 		for _, value in ipairs(self.disable_list) do
 			if go.exists(value) then
 				go.delete(value, true)

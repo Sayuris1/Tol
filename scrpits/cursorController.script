@@ -93,13 +93,10 @@ function on_message(self, message_id, message, sender)
 			msg.post(self.url_robot2, "add_weapon_right", {value = msg.url(nil, "/weapon_right_up_down/script", "buttonController")})
 
 		elseif message.id == hash("/alig_up") then
+			msg.post(self.url_robot2, "down_move_vector")
+
+		elseif message.id == hash("/alig_down") then
 			msg.post(self.url_robot2, "up_move_vector")
-
-		elseif message.id == hash("/alig_down") then
-			msg.post(self.url_robot2, "down_move_vector")
-
-		elseif message.id == hash("/alig_down") then
-			msg.post(self.url_robot2, "down_move_vector")
 
 		elseif message.id == hash("/won_state") then
 			msg.post("/game_controller#gameController", "build_state")
