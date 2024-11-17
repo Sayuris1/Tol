@@ -21,13 +21,30 @@ end
 local function add_auto_shields(self)
 	self.current_cycles_without_shield = self.current_cycles_without_shield + 1
 
-	if self.shield_per_circle <= 0 then
-		return
-	end
-
-	if self.current_cycles_without_shield >= self.shield_per_circle then
+	if self.current_cycles_without_shield >= self.shield_per_circle and self.shield_per_circle > 0 then
 		add_circle(self, 4)
 	end
+
+	local covered_circles = {}
+	for index, value in ipairs(circles[self.team_index]) do
+		if value.circle_type == 4 then
+			covered_circles[index] = true
+
+			if circles[self.team_index][index-1] then
+				covered_circles[index-1] = true
+			end
+
+			if circles[self.team_index][index+1] then
+				covered_circles[index+1] = true
+			end
+		end
+	end
+
+	local count = 0
+	for _ in pairs(covered_circles) do count = count + 1 end
+
+	local percentile = math.floor(count / #circles[self.team_index] * 100)
+	label.set_text("/shield_coverage#label", "Shield Covered Area: " .. percentile .. "%")
 end
 
 function add_circle(self, circle_type)
@@ -36,13 +53,14 @@ function add_circle(self, circle_type)
 	local circle = factory.create("#circle_factory", nil, nil, {speed = self.init_speed, index = #circles_table+1, team_index = self.team_index, circle_type = circle_type, parent = msg.url(), move_vector = self.move_vector}, 0.1)
 	local circle_url = msg.url(circle)
 	circle_url.fragment= "circleController"
-	circles_table[#circles_table+1] = {circle = circle_url, touch_pos = {}}
+	circles_table[#circles_table+1] = {circle = circle_url, touch_pos = {}, circle_type = circle_type}
 
 	local pos = 13.7 * #circles_table
 
 	go.set_position(self.move_vector * pos, circle)
 	go.set_parent(circle, ".")
 
+	self.disable_list[#self.disable_list+1] = circle
 	if circle_type == 1 then
 		self.speed = self.speed + self.type_one_speed
 
@@ -53,37 +71,52 @@ function add_circle(self, circle_type)
 		go.set_parent(weapon, circle)
 
 		add_auto_shields(self)
+		self.right_weapons = self.right_weapons + 1
+
+		self.disable_list[#self.disable_list+1] = weapon
 
 	elseif circle_type == 3 then
 		local weapon = factory.create("#weapon_factory", vmath.vector3(0), nil, {team_index = self.team_index, dir = -1})
 		go.set_parent(weapon, circle)
 
 		add_auto_shields(self)
+		self.left_weapons = self.left_weapons + 1
+
+		self.disable_list[#self.disable_list+1] = weapon
 
 	elseif circle_type == 4 then
 		local shield = factory.create("#shield_factory", nil, nil, {team_index = self.team_index, parent = circle_url})
 		go.set_position(vmath.vector3(0, 86, 0), shield)
 		go.set_parent(shield, circle)
 
+		self.disable_list[#self.disable_list+1] = shield
+
 		local shield = factory.create("#shield_factory", nil, nil, {team_index = self.team_index, parent = circle_url})
 		go.set_position(vmath.vector3(0, -86, 0), shield)
 		go.set_parent(shield, circle)
 
 		self.current_cycles_without_shield = 0
+
+		self.disable_list[#self.disable_list+1] = shield
 	end
 
 	update_speed_circles(self.speed, self.team_index)
 	go.set(circle_url, "enabled", false)
+
+	if self.team_index == 2 then
+		for _, value in ipairs(self.disable_list) do
+			msg.post(value, "disable")
+		end
+	end
 end
 
 go.property("speed", 10)
 go.property("type_one_speed", 10)
 go.property("team_index", 1)
 
-circles = {{}, {}}
-bullets = {}
-
 function init(self)
+	bullets = {}
+
 	local pos_sign = self.team_index == 1 and 1 or -1
 	go.set_position(vmath.vector3(-940 * pos_sign, 520, 0))
 
@@ -92,6 +125,12 @@ function init(self)
 
 	self.current_cycles_without_shield = 0
 	self.shield_per_circle = 0
+
+	self.left_weapons = 0
+	self.right_weapons = 0
+	self.alignment_angle = 45
+
+	self.disable_list = {}
 end
 
 function final(self)
@@ -117,16 +156,26 @@ end
 function on_message(self, message_id, message, sender)
 	if message_id == hash("enable_all_circles") then
 		for _, value in ipairs(circles[self.team_index]) do
+			msg.post(value.circle.path, "enable")
+
 			go.set(value.circle, "enabled", true)
 		end
+
+		for _, value in ipairs(self.disable_list) do
+			msg.post(value, "enable")
+		end
+
+		go.set("/game_controller#gameController", "runing", true)
 
 	elseif message_id == hash("add_speed") then
 		if message.value then
 				for i = 1, go.get(message.value, "value"), 1 do
 					add_circle(self, 1)
 				end
+			label.set_text("/total_speed#label", "Total Speed: " .. self.speed)
 			return
 		end
+
 		add_circle(self, 1)
 
 	elseif message_id == hash("add_weapon_right") then
@@ -134,6 +183,7 @@ function on_message(self, message_id, message, sender)
 				for i = 1, go.get(message.value, "value"), 1 do
 					add_circle(self, 2)
 				end
+			label.set_text("/right_weapons#label", "Total Right Weapons: " .. self.right_weapons)
 			return
 		end
 		add_circle(self, 2)
@@ -143,6 +193,7 @@ function on_message(self, message_id, message, sender)
 				for i = 1, go.get(message.value, "value"), 1 do
 					add_circle(self, 3)
 				end
+			label.set_text("left_weapons#label", "Total Left Weapons: " .. self.left_weapons)
 			return
 		end
 		add_circle(self, 3)
@@ -158,9 +209,15 @@ function on_message(self, message_id, message, sender)
 		self.move_vector = vmath.rotate(vmath.quat_rotation_z(math.rad(5)), self.move_vector)
 		update_move_vectors(self.move_vector, self.team_index)
 
+		self.alignment_angle = self.alignment_angle + 5
+		label.set_text("alignment#label", "Alignment Angle: " .. self.alignment_angle)
+
 	elseif message_id == hash("down_move_vector") then
 		self.move_vector = vmath.rotate(vmath.quat_rotation_z(math.rad(-5)), self.move_vector)
 		update_move_vectors(self.move_vector, self.team_index)
+
+		self.alignment_angle = self.alignment_angle - 5
+		label.set_text("alignment#label", "Alignment Angle: " .. self.alignment_angle)
 	end
 end
 

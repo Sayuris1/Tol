@@ -65,7 +65,7 @@ function on_message(self, message_id, message, sender)
 				bullets[message.other_id] = nil
 				go.delete(message.other_id)
 
-				go.delete(self.circles_table[self.index].circle, true)
+				go.delete(nil, true)
 				self.circles_table[self.index] = {circle = nil, touch_pos = {}}
 
 				--for i = 1, self.index, 1 do
