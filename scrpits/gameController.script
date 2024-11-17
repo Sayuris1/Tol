@@ -14,6 +14,38 @@ function init(self)
 
 	self.url_robot1 = msg.url(nil, "/robot1", "robotController")
 	self.url_robot2 = msg.url(nil, "/robot2", "robotController")
+
+	self.text_tools =
+	{
+		"/shield_up_down/up", "/shield_up_down/down",
+		"/speed_up_down/up", "/speed_up_down/down",
+		"/weapon_left_up_down/up", "/weapon_left_up_down/down",
+		"/weapon_right_up_down/up", "/weapon_right_up_down/down",
+
+		"/shield_up_down/script",
+		"/speed_up_down/script",
+		"/weapon_left_up_down/script",
+		"/weapon_right_up_down/script",
+
+		"/speed_text", "/shield_text", "/alig_down", "/alig_up",
+		"/tuto_text", "/weapon_left_text", "weapon_right_text",
+
+		"/total_speed", "/shield_coverage", "/left_weapons", "/right_weapons",
+		"/alignment", "/text_done"
+	}
+
+	self.visual_tools =
+	{
+		"/shield", "/speed", "/visual_done", "/vector_down", "/vector_up",
+		"/weapon_left", "weapon_right"
+	}
+
+	for _, value in ipairs(self.text_tools) do
+		msg.post(value, "disable")
+	end
+
+	msg.post("/start_other_turn", "disable")
+	msg.post("/fight", "disable")
 end
 
 function final(self)
@@ -61,6 +93,44 @@ function on_message(self, message_id, message, sender)
 		msg.post(self.url_robot1, "build_state")
 		msg.post(self.url_robot2, "build_state")
 		msg.post("/cursor#cursorController", "swap_url")
+
+		msg.post("won_state", "disable")
+		for _, value in ipairs(self.visual_tools) do
+			msg.post(value, "enable")
+		end
+
+		self.url_robot1, self.url_robot2 = self.url_robot2, self.url_robot1
+	elseif message_id == hash("visual_done") then
+		for _, value in ipairs(self.visual_tools) do
+			msg.post(value, "disable")
+		end
+
+		msg.post("/start_other_turn", "enable")
+		label.set_text("/start_other_turn#label", "Start Building")
+
+		msg.post(self.url_robot1, "visual_done")
+
+	elseif message_id == hash("start_other_turn") then
+		for _, value in ipairs(self.text_tools) do
+			msg.post(value, "enable")
+		end
+
+		msg.post("/start_other_turn", "disable")
+
+	elseif message_id == hash("text_done") then
+		for _, value in ipairs(self.text_tools) do
+			msg.post(value, "disable")
+		end
+
+		msg.post("/fight", "enable")
+
+	elseif message_id == hash("fight") then
+		msg.post(self.url_robot1, "enable_all_circles")
+		msg.post(self.url_robot2, "enable_all_circles")
+
+		msg.post("/fight", "disable")
+
+		msg.post("/shield_up_down/script#buttonController", "reset")
 	end
 end
 

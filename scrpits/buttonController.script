@@ -37,6 +37,9 @@ function on_message(self, message_id, message, sender)
 		add_to_value(self, 1)
 	elseif message_id == hash("down") then
 		add_to_value(self, -1)
+	elseif message_id == hash("reset") then
+		self.value = 0
+		label.set_text("#label", self.value)
 	end
 end
 

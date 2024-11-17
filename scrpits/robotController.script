@@ -71,7 +71,7 @@ function add_circle(self, circle_type)
 		go.set_parent(weapon, circle)
 
 		add_auto_shields(self)
-		self.right_weapons = self.right_weapons + 1
+		self.left_weapons = self.left_weapons + 1
 
 		self.disable_list[#self.disable_list+1] = weapon
 
@@ -80,7 +80,7 @@ function add_circle(self, circle_type)
 		go.set_parent(weapon, circle)
 
 		add_auto_shields(self)
-		self.left_weapons = self.left_weapons + 1
+		self.right_weapons = self.right_weapons + 1
 
 		self.disable_list[#self.disable_list+1] = weapon
 
@@ -168,6 +168,7 @@ function on_message(self, message_id, message, sender)
 		end
 
 		go.set("/game_controller#gameController", "runing", true)
+		self.shield_per_circle = 0
 
 	elseif message_id == hash("add_speed") then
 		if message.value then
@@ -183,22 +184,22 @@ function on_message(self, message_id, message, sender)
 	elseif message_id == hash("add_weapon_right") then
 		if message.value then
 				for i = 1, go.get(message.value, "value"), 1 do
-					add_circle(self, 2)
+					add_circle(self, 3)
 				end
 			label.set_text("/right_weapons#label", "Total Right Weapons: " .. self.right_weapons)
 			return
 		end
-		add_circle(self, 2)
+		add_circle(self, 3)
 
 	elseif message_id == hash("add_weapon_left") then
 		if message.value then
 				for i = 1, go.get(message.value, "value"), 1 do
-					add_circle(self, 3)
+					add_circle(self, 2)
 				end
 			label.set_text("left_weapons#label", "Total Left Weapons: " .. self.left_weapons)
 			return
 		end
-		add_circle(self, 3)
+		add_circle(self, 2)
 
 	elseif message_id == hash("add_shield") then
 		if message.value then
@@ -250,8 +251,13 @@ function on_message(self, message_id, message, sender)
 			replace_index = 4
 		end
 
-		for index, value in ipairs(circles[replace_index]) do
+		for _, value in ipairs(circles[replace_index]) do
 			add_circle(self, value.circle_type)
+		end
+
+	elseif message_id == hash("visual_done") then
+		for _, value in ipairs(self.disable_list) do
+			msg.post(value, "disable")
 		end
 	end
 end

@@ -64,14 +64,6 @@ function on_message(self, message_id, message, sender)
 				go.delete(message.other_id)
 
 				go.delete(nil, true)
-				self.circles_table[self.index] = {circle = nil, touch_pos = {}}
-
-				--for i = 1, self.index, 1 do
-					--if self.circles_table[i].circle then
-						--go.delete(self.circles_table[i].circle, true)
-						--self.circles_table[i] = {circle = nil, touch_pos = {}}
-					--end
-				--end
 			end
 		else
 			if message.enter then

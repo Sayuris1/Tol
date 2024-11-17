@@ -35,9 +35,18 @@ function on_message(self, message_id, message, sender)
 	elseif message_id == cursor.CLICKED then
 		if message.id == hash("/speed") then
 			msg.post(self.url_robot1, "add_speed")
-		elseif message.id == hash("/start") then
-			msg.post(self.url_robot1, "enable_all_circles")
-			msg.post(self.url_robot2, "enable_all_circles")
+
+		elseif message.id == hash("/text_done") then
+			msg.post("/game_controller#gameController", "text_done")
+
+		elseif message.id == hash("/visual_done") then
+			msg.post("/game_controller#gameController", "visual_done")
+
+		elseif message.id == hash("/start_other_turn") then
+			msg.post("/game_controller#gameController", "start_other_turn")
+
+		elseif message.id == hash("/fight") then
+			msg.post("/game_controller#gameController", "fight")
 
 		elseif message.id == hash("/shield") then
 			msg.post(self.url_robot1, "add_shield")
