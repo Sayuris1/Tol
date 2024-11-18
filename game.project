@@ -48,3 +48,8 @@ max_count = 2048
 [collection]
 max_instances = 2048
 
+[render]
+clear_color_red = 0.13
+clear_color_green = 0.13
+clear_color_blue = 0.13
+

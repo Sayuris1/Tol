@@ -46,8 +46,8 @@ collection_instances {
   id: "shield_up_down"
   collection: "/prefabs/up_down_button.collection"
   position {
-    x: 333.0
-    y: 461.0
+    x: -242.0
+    y: 235.0
   }
   scale3 {
     x: 0.3
@@ -59,8 +59,8 @@ collection_instances {
   id: "speed_up_down"
   collection: "/prefabs/up_down_button.collection"
   position {
-    x: 333.0
-    y: 362.0
+    x: -850.0
+    y: 20.0
   }
   scale3 {
     x: 0.3
@@ -72,8 +72,8 @@ collection_instances {
   id: "weapon_right_up_down"
   collection: "/prefabs/up_down_button.collection"
   position {
-    x: 333.0
-    y: 147.0
+    x: -848.0
+    y: -217.0
   }
   scale3 {
     x: 0.3
@@ -85,8 +85,8 @@ collection_instances {
   id: "weapon_left_up_down"
   collection: "/prefabs/up_down_button.collection"
   position {
-    x: 333.0
-    y: 250.0
+    x: -848.0
+    y: -436.0
   }
   scale3 {
     x: 0.3
@@ -411,8 +411,8 @@ embedded_instances {
   "    index: 0\\n"
   "    count: 3\\n"
   "  }\\n"
-  "  data: 63.218243\\n"
-  "  data: 16.883776\\n"
+  "  data: 121.98559\\n"
+  "  data: 25.366732\\n"
   "  data: 10.0\\n"
   "}\\n"
   "\"\n"
@@ -425,14 +425,14 @@ embedded_instances {
   "  y: 32.0\\n"
   "}\\n"
   "text: \\\"Add Speed\\\"\\n"
-  "font: \\\"/builtins/fonts/default.font\\\"\\n"
+  "font: \\\"/assets/Font/FatPixel.font\\\"\\n"
   "material: \\\"/builtins/fonts/label-df.material\\\"\\n"
   "\"\n"
   "}\n"
   ""
   position {
-    x: -761.0
-    y: 340.0
+    x: -684.0
+    y: 333.0
   }
 }
 embedded_instances {
@@ -456,8 +456,8 @@ embedded_instances {
   "    index: 0\\n"
   "    count: 3\\n"
   "  }\\n"
-  "  data: 63.218243\\n"
-  "  data: 16.410301\\n"
+  "  data: 161.46811\\n"
+  "  data: 26.5747\\n"
   "  data: 10.0\\n"
   "}\\n"
   "\"\n"
@@ -469,15 +469,15 @@ embedded_instances {
   "  x: 128.0\\n"
   "  y: 32.0\\n"
   "}\\n"
-  "text: \\\"Start\\\"\\n"
-  "font: \\\"/builtins/fonts/default.font\\\"\\n"
+  "text: \\\"Turn Ready!!\\\"\\n"
+  "font: \\\"/assets/Font/FatPixel.font\\\"\\n"
   "material: \\\"/builtins/fonts/label-df.material\\\"\\n"
   "\"\n"
   "}\n"
   ""
   position {
-    x: -190.0
-    y: -338.0
+    x: -126.0
+    y: -467.0
   }
 }
 embedded_instances {
@@ -501,8 +501,8 @@ embedded_instances {
   "    index: 0\\n"
   "    count: 3\\n"
   "  }\\n"
-  "  data: 63.02738\\n"
-  "  data: 18.422829\\n"
+  "  data: 204.32507\\n"
+  "  data: 29.836264\\n"
   "  data: 10.0\\n"
   "}\\n"
   "\"\n"
@@ -515,14 +515,14 @@ embedded_instances {
   "  y: 32.0\\n"
   "}\\n"
   "text: \\\"Add Weapon Right\\\"\\n"
-  "font: \\\"/builtins/fonts/default.font\\\"\\n"
+  "font: \\\"/assets/Font/FatPixel.font\\\"\\n"
   "material: \\\"/builtins/fonts/label-df.material\\\"\\n"
   "\"\n"
   "}\n"
   ""
   position {
-    x: -628.0
-    y: 150.0
+    x: -599.0
+    y: 213.0
   }
 }
 embedded_instances {
@@ -546,8 +546,8 @@ embedded_instances {
   "    index: 0\\n"
   "    count: 3\\n"
   "  }\\n"
-  "  data: 63.218243\\n"
-  "  data: 16.999207\\n"
+  "  data: 198.38708\\n"
+  "  data: 25.386278\\n"
   "  data: 10.0\\n"
   "}\\n"
   "\"\n"
@@ -560,14 +560,14 @@ embedded_instances {
   "  y: 32.0\\n"
   "}\\n"
   "text: \\\"Add Weapon Left\\\"\\n"
-  "font: \\\"/builtins/fonts/default.font\\\"\\n"
+  "font: \\\"/assets/Font/FatPixel.font\\\"\\n"
   "material: \\\"/builtins/fonts/label-df.material\\\"\\n"
   "\"\n"
   "}\n"
   ""
   position {
-    x: -307.0
-    y: 241.0
+    x: -615.0
+    y: 93.0
   }
 }
 embedded_instances {
@@ -591,8 +591,8 @@ embedded_instances {
   "    index: 0\\n"
   "    count: 3\\n"
   "  }\\n"
-  "  data: 63.218243\\n"
-  "  data: 18.732801\\n"
+  "  data: 132.24106\\n"
+  "  data: 24.63073\\n"
   "  data: 10.0\\n"
   "}\\n"
   "\"\n"
@@ -605,14 +605,14 @@ embedded_instances {
   "  y: 32.0\\n"
   "}\\n"
   "text: \\\"Add Shield\\\"\\n"
-  "font: \\\"/builtins/fonts/default.font\\\"\\n"
+  "font: \\\"/assets/Font/FatPixel.font\\\"\\n"
   "material: \\\"/builtins/fonts/label-df.material\\\"\\n"
   "\"\n"
   "}\n"
   ""
   position {
-    x: -290.0
-    y: 36.0
+    x: -681.0
+    y: -267.0
   }
 }
 embedded_instances {
@@ -636,8 +636,8 @@ embedded_instances {
   "    index: 0\\n"
   "    count: 3\\n"
   "  }\\n"
-  "  data: 77.96102\\n"
-  "  data: 18.422829\\n"
+  "  data: 244.21486\\n"
+  "  data: 24.80417\\n"
   "  data: 10.0\\n"
   "}\\n"
   "\"\n"
@@ -650,14 +650,14 @@ embedded_instances {
   "  y: 32.0\\n"
   "}\\n"
   "text: \\\"Move Alignment Down\\\"\\n"
-  "font: \\\"/builtins/fonts/default.font\\\"\\n"
+  "font: \\\"/assets/Font/FatPixel.font\\\"\\n"
   "material: \\\"/builtins/fonts/label-df.material\\\"\\n"
   "\"\n"
   "}\n"
   ""
   position {
-    x: -710.0
-    y: -205.0
+    x: -394.0
+    y: -147.0
   }
 }
 embedded_instances {
@@ -681,8 +681,8 @@ embedded_instances {
   "    index: 0\\n"
   "    count: 3\\n"
   "  }\\n"
-  "  data: 70.24718\\n"
-  "  data: 18.422829\\n"
+  "  data: 227.83694\\n"
+  "  data: 23.86814\\n"
   "  data: 10.0\\n"
   "}\\n"
   "\"\n"
@@ -695,14 +695,14 @@ embedded_instances {
   "  y: 32.0\\n"
   "}\\n"
   "text: \\\"Move Alignment Up\\\"\\n"
-  "font: \\\"/builtins/fonts/default.font\\\"\\n"
+  "font: \\\"/assets/Font/FatPixel.font\\\"\\n"
   "material: \\\"/builtins/fonts/label-df.material\\\"\\n"
   "\"\n"
   "}\n"
   ""
   position {
-    x: -628.0
-    y: -288.0
+    x: -484.0
+    y: -27.0
   }
 }
 embedded_instances {
@@ -734,14 +734,14 @@ embedded_instances {
   "text: \\\"Add a shield per\\\\n"
   "\\\"\\n"
   "  \\\"this number of new circles:\\\"\\n"
-  "font: \\\"/builtins/fonts/default.font\\\"\\n"
+  "font: \\\"/assets/Font/FatPixel.font\\\"\\n"
   "material: \\\"/builtins/fonts/label-df.material\\\"\\n"
   "\"\n"
   "}\n"
   ""
   position {
-    x: 156.0
-    y: 468.0
+    x: -592.0
+    y: 260.0
   }
 }
 embedded_instances {
@@ -754,14 +754,13 @@ embedded_instances {
   "  y: 32.0\\n"
   "}\\n"
   "text: \\\"Click \\\\\\\"Add\\\\\\\" to create the number of new circles shown next to it.\\\"\\n"
-  "font: \\\"/builtins/fonts/default.font\\\"\\n"
+  "font: \\\"/assets/Font/FatPixel.font\\\"\\n"
   "material: \\\"/builtins/fonts/label-df.material\\\"\\n"
   "\"\n"
   "}\n"
   ""
   position {
-    x: 669.0
-    y: 505.0
+    y: 425.0
   }
 }
 embedded_instances {
@@ -774,7 +773,7 @@ embedded_instances {
   "  y: 32.0\\n"
   "}\\n"
   "text: \\\"Add Weapon Left Circles\\\"\\n"
-  "font: \\\"/builtins/fonts/default.font\\\"\\n"
+  "font: \\\"/assets/Font/FatPixel.font\\\"\\n"
   "material: \\\"/builtins/fonts/label-df.material\\\"\\n"
   "\"\n"
   "}\n"
@@ -797,16 +796,16 @@ embedded_instances {
   "    index: 0\\n"
   "    count: 3\\n"
   "  }\\n"
-  "  data: 93.51199\\n"
-  "  data: 15.312017\\n"
+  "  data: 283.49622\\n"
+  "  data: 26.15429\\n"
   "  data: 10.0\\n"
   "}\\n"
   "\"\n"
   "}\n"
   ""
   position {
-    x: 462.0
-    y: 256.0
+    x: -510.0
+    y: -426.0
   }
 }
 embedded_instances {
@@ -819,7 +818,7 @@ embedded_instances {
   "  y: 32.0\\n"
   "}\\n"
   "text: \\\"Add Weapon Right Circles\\\"\\n"
-  "font: \\\"/builtins/fonts/default.font\\\"\\n"
+  "font: \\\"/assets/Font/FatPixel.font\\\"\\n"
   "material: \\\"/builtins/fonts/label-df.material\\\"\\n"
   "\"\n"
   "}\n"
@@ -842,16 +841,16 @@ embedded_instances {
   "    index: 0\\n"
   "    count: 3\\n"
   "  }\\n"
-  "  data: 98.146835\\n"
-  "  data: 15.312017\\n"
+  "  data: 291.41516\\n"
+  "  data: 25.18208\\n"
   "  data: 10.0\\n"
   "}\\n"
   "\"\n"
   "}\n"
   ""
   position {
-    x: 467.0
-    y: 153.0
+    x: -498.0
+    y: -207.0
   }
 }
 embedded_instances {
@@ -864,7 +863,7 @@ embedded_instances {
   "  y: 32.0\\n"
   "}\\n"
   "text: \\\"Add Speed Circles\\\"\\n"
-  "font: \\\"/builtins/fonts/default.font\\\"\\n"
+  "font: \\\"/assets/Font/FatPixel.font\\\"\\n"
   "material: \\\"/builtins/fonts/label-df.material\\\"\\n"
   "\"\n"
   "}\n"
@@ -887,16 +886,16 @@ embedded_instances {
   "    index: 0\\n"
   "    count: 3\\n"
   "  }\\n"
-  "  data: 71.60429\\n"
-  "  data: 15.312017\\n"
+  "  data: 206.72688\\n"
+  "  data: 27.830618\\n"
   "  data: 10.0\\n"
   "}\\n"
   "\"\n"
   "}\n"
   ""
   position {
-    x: 460.0
-    y: 367.0
+    x: -579.0
+    y: 30.0
   }
 }
 embedded_instances {
@@ -920,8 +919,8 @@ embedded_instances {
   "    index: 0\\n"
   "    count: 3\\n"
   "  }\\n"
-  "  data: 77.96102\\n"
-  "  data: 18.422829\\n"
+  "  data: 244.7769\\n"
+  "  data: 21.928375\\n"
   "  data: 10.0\\n"
   "}\\n"
   "\"\n"
@@ -934,14 +933,14 @@ embedded_instances {
   "  y: 32.0\\n"
   "}\\n"
   "text: \\\"Move Alignment Down\\\"\\n"
-  "font: \\\"/builtins/fonts/default.font\\\"\\n"
+  "font: \\\"/assets/Font/FatPixel.font\\\"\\n"
   "material: \\\"/builtins/fonts/label-df.material\\\"\\n"
   "\"\n"
   "}\n"
   ""
   position {
-    x: 575.0
-    y: 41.0
+    x: 363.0
+    y: -77.0
   }
 }
 embedded_instances {
@@ -965,8 +964,8 @@ embedded_instances {
   "    index: 0\\n"
   "    count: 3\\n"
   "  }\\n"
-  "  data: 70.24718\\n"
-  "  data: 18.422829\\n"
+  "  data: 217.12569\\n"
+  "  data: 24.605785\\n"
   "  data: 10.0\\n"
   "}\\n"
   "\"\n"
@@ -979,239 +978,116 @@ embedded_instances {
   "  y: 32.0\\n"
   "}\\n"
   "text: \\\"Move Alignment Up\\\"\\n"
-  "font: \\\"/builtins/fonts/default.font\\\"\\n"
+  "font: \\\"/assets/Font/FatPixel.font\\\"\\n"
   "material: \\\"/builtins/fonts/label-df.material\\\"\\n"
   "\"\n"
   "}\n"
   ""
   position {
-    x: 657.0
-    y: -42.0
+    x: 552.0
+    y: 16.0
   }
 }
 embedded_instances {
   id: "total_speed"
   data: "embedded_components {\n"
-  "  id: \"collisionobject\"\n"
-  "  type: \"collisionobject\"\n"
-  "  data: \"type: COLLISION_OBJECT_TYPE_TRIGGER\\n"
-  "mass: 0.0\\n"
-  "friction: 0.1\\n"
-  "restitution: 0.5\\n"
-  "group: \\\"ui\\\"\\n"
-  "mask: \\\"cursor\\\"\\n"
-  "embedded_collision_shape {\\n"
-  "  shapes {\\n"
-  "    shape_type: TYPE_BOX\\n"
-  "    position {\\n"
-  "    }\\n"
-  "    rotation {\\n"
-  "    }\\n"
-  "    index: 0\\n"
-  "    count: 3\\n"
-  "  }\\n"
-  "  data: 98.146835\\n"
-  "  data: 15.312017\\n"
-  "  data: 10.0\\n"
-  "}\\n"
-  "\"\n"
-  "}\n"
-  "embedded_components {\n"
   "  id: \"label\"\n"
   "  type: \"label\"\n"
   "  data: \"size {\\n"
   "  x: 128.0\\n"
   "  y: 32.0\\n"
   "}\\n"
-  "text: \\\"Add Weapon Right Circles\\\"\\n"
-  "font: \\\"/builtins/fonts/default.font\\\"\\n"
+  "text: \\\"Total Speed: 250\\\\n"
+  "\\\"\\n"
+  "  \\\"\\\"\\n"
+  "font: \\\"/assets/Font/FatPixel.font\\\"\\n"
   "material: \\\"/builtins/fonts/label-df.material\\\"\\n"
   "\"\n"
   "}\n"
   ""
   position {
-    x: 210.0
-    y: -140.0
+    x: 626.0
+    y: -232.0
   }
 }
 embedded_instances {
   id: "shield_coverage"
   data: "embedded_components {\n"
-  "  id: \"collisionobject\"\n"
-  "  type: \"collisionobject\"\n"
-  "  data: \"type: COLLISION_OBJECT_TYPE_TRIGGER\\n"
-  "mass: 0.0\\n"
-  "friction: 0.1\\n"
-  "restitution: 0.5\\n"
-  "group: \\\"ui\\\"\\n"
-  "mask: \\\"cursor\\\"\\n"
-  "embedded_collision_shape {\\n"
-  "  shapes {\\n"
-  "    shape_type: TYPE_BOX\\n"
-  "    position {\\n"
-  "    }\\n"
-  "    rotation {\\n"
-  "    }\\n"
-  "    index: 0\\n"
-  "    count: 3\\n"
-  "  }\\n"
-  "  data: 98.146835\\n"
-  "  data: 15.312017\\n"
-  "  data: 10.0\\n"
-  "}\\n"
-  "\"\n"
-  "}\n"
-  "embedded_components {\n"
   "  id: \"label\"\n"
   "  type: \"label\"\n"
   "  data: \"size {\\n"
   "  x: 128.0\\n"
   "  y: 32.0\\n"
   "}\\n"
-  "text: \\\"Add Weapon Right Circles\\\"\\n"
-  "font: \\\"/builtins/fonts/default.font\\\"\\n"
+  "text: \\\"Shield Covered Area: 0%\\\"\\n"
+  "font: \\\"/assets/Font/FatPixel.font\\\"\\n"
   "material: \\\"/builtins/fonts/label-df.material\\\"\\n"
   "\"\n"
   "}\n"
   ""
   position {
-    x: 210.0
-    y: -199.0
+    x: 626.0
+    y: -291.0
   }
 }
 embedded_instances {
   id: "left_weapons"
   data: "embedded_components {\n"
-  "  id: \"collisionobject\"\n"
-  "  type: \"collisionobject\"\n"
-  "  data: \"type: COLLISION_OBJECT_TYPE_TRIGGER\\n"
-  "mass: 0.0\\n"
-  "friction: 0.1\\n"
-  "restitution: 0.5\\n"
-  "group: \\\"ui\\\"\\n"
-  "mask: \\\"cursor\\\"\\n"
-  "embedded_collision_shape {\\n"
-  "  shapes {\\n"
-  "    shape_type: TYPE_BOX\\n"
-  "    position {\\n"
-  "    }\\n"
-  "    rotation {\\n"
-  "    }\\n"
-  "    index: 0\\n"
-  "    count: 3\\n"
-  "  }\\n"
-  "  data: 98.146835\\n"
-  "  data: 15.312017\\n"
-  "  data: 10.0\\n"
-  "}\\n"
-  "\"\n"
-  "}\n"
-  "embedded_components {\n"
   "  id: \"label\"\n"
   "  type: \"label\"\n"
   "  data: \"size {\\n"
   "  x: 128.0\\n"
   "  y: 32.0\\n"
   "}\\n"
-  "text: \\\"Add Weapon Right Circles\\\"\\n"
-  "font: \\\"/builtins/fonts/default.font\\\"\\n"
+  "text: \\\"Total Left Weapons: 0\\\"\\n"
+  "font: \\\"/assets/Font/FatPixel.font\\\"\\n"
   "material: \\\"/builtins/fonts/label-df.material\\\"\\n"
   "\"\n"
   "}\n"
   ""
   position {
-    x: 210.0
-    y: -250.0
+    x: 626.0
+    y: -342.0
   }
 }
 embedded_instances {
   id: "right_weapons"
   data: "embedded_components {\n"
-  "  id: \"collisionobject\"\n"
-  "  type: \"collisionobject\"\n"
-  "  data: \"type: COLLISION_OBJECT_TYPE_TRIGGER\\n"
-  "mass: 0.0\\n"
-  "friction: 0.1\\n"
-  "restitution: 0.5\\n"
-  "group: \\\"ui\\\"\\n"
-  "mask: \\\"cursor\\\"\\n"
-  "embedded_collision_shape {\\n"
-  "  shapes {\\n"
-  "    shape_type: TYPE_BOX\\n"
-  "    position {\\n"
-  "    }\\n"
-  "    rotation {\\n"
-  "    }\\n"
-  "    index: 0\\n"
-  "    count: 3\\n"
-  "  }\\n"
-  "  data: 98.146835\\n"
-  "  data: 15.312017\\n"
-  "  data: 10.0\\n"
-  "}\\n"
-  "\"\n"
-  "}\n"
-  "embedded_components {\n"
   "  id: \"label\"\n"
   "  type: \"label\"\n"
   "  data: \"size {\\n"
   "  x: 128.0\\n"
   "  y: 32.0\\n"
   "}\\n"
-  "text: \\\"Add Weapon Right Circles\\\"\\n"
-  "font: \\\"/builtins/fonts/default.font\\\"\\n"
+  "text: \\\"Total RIght Weapons 0\\\"\\n"
+  "font: \\\"/assets/Font/FatPixel.font\\\"\\n"
   "material: \\\"/builtins/fonts/label-df.material\\\"\\n"
   "\"\n"
   "}\n"
   ""
   position {
-    x: 210.0
-    y: -303.0
+    x: 626.0
+    y: -395.0
   }
 }
 embedded_instances {
   id: "alignment"
   data: "embedded_components {\n"
-  "  id: \"collisionobject\"\n"
-  "  type: \"collisionobject\"\n"
-  "  data: \"type: COLLISION_OBJECT_TYPE_TRIGGER\\n"
-  "mass: 0.0\\n"
-  "friction: 0.1\\n"
-  "restitution: 0.5\\n"
-  "group: \\\"ui\\\"\\n"
-  "mask: \\\"cursor\\\"\\n"
-  "embedded_collision_shape {\\n"
-  "  shapes {\\n"
-  "    shape_type: TYPE_BOX\\n"
-  "    position {\\n"
-  "    }\\n"
-  "    rotation {\\n"
-  "    }\\n"
-  "    index: 0\\n"
-  "    count: 3\\n"
-  "  }\\n"
-  "  data: 98.146835\\n"
-  "  data: 15.312017\\n"
-  "  data: 10.0\\n"
-  "}\\n"
-  "\"\n"
-  "}\n"
-  "embedded_components {\n"
   "  id: \"label\"\n"
   "  type: \"label\"\n"
   "  data: \"size {\\n"
   "  x: 128.0\\n"
   "  y: 32.0\\n"
   "}\\n"
-  "text: \\\"Add Weapon Right Circles\\\"\\n"
-  "font: \\\"/builtins/fonts/default.font\\\"\\n"
+  "text: \\\"Alignment Angle 45\\\"\\n"
+  "font: \\\"/assets/Font/FatPixel.font\\\"\\n"
   "material: \\\"/builtins/fonts/label-df.material\\\"\\n"
   "\"\n"
   "}\n"
   ""
   position {
-    x: 210.0
-    y: -358.0
+    x: 626.0
+    y: -450.0
   }
 }
 embedded_instances {
@@ -1232,7 +1108,7 @@ embedded_instances {
   "  y: 32.0\\n"
   "}\\n"
   "text: \\\"Label\\\"\\n"
-  "font: \\\"/builtins/fonts/default.font\\\"\\n"
+  "font: \\\"/assets/Font/FatPixel.font\\\"\\n"
   "material: \\\"/builtins/fonts/label-df.material\\\"\\n"
   "\"\n"
   "  position {\n"
@@ -1247,7 +1123,7 @@ embedded_instances {
   "  y: 32.0\\n"
   "}\\n"
   "text: \\\"Label\\\"\\n"
-  "font: \\\"/builtins/fonts/default.font\\\"\\n"
+  "font: \\\"/assets/Font/FatPixel.font\\\"\\n"
   "material: \\\"/builtins/fonts/label-df.material\\\"\\n"
   "\"\n"
   "  position {\n"
@@ -1262,7 +1138,7 @@ embedded_instances {
   "  y: 32.0\\n"
   "}\\n"
   "text: \\\"Press for next round\\\"\\n"
-  "font: \\\"/builtins/fonts/default.font\\\"\\n"
+  "font: \\\"/assets/Font/FatPixel.font\\\"\\n"
   "material: \\\"/builtins/fonts/label-df.material\\\"\\n"
   "\"\n"
   "  position {\n"
@@ -1289,8 +1165,8 @@ embedded_instances {
   "    index: 0\\n"
   "    count: 3\\n"
   "  }\\n"
-  "  data: 93.437164\\n"
-  "  data: 18.732801\\n"
+  "  data: 256.29343\\n"
+  "  data: 22.947557\\n"
   "  data: 10.0\\n"
   "}\\n"
   "\"\n"
@@ -1318,8 +1194,8 @@ embedded_instances {
   "    index: 0\\n"
   "    count: 3\\n"
   "  }\\n"
-  "  data: 63.218243\\n"
-  "  data: 16.410301\\n"
+  "  data: 153.77571\\n"
+  "  data: 26.792063\\n"
   "  data: 10.0\\n"
   "}\\n"
   "\"\n"
@@ -1331,15 +1207,15 @@ embedded_instances {
   "  x: 128.0\\n"
   "  y: 32.0\\n"
   "}\\n"
-  "text: \\\"Start\\\"\\n"
-  "font: \\\"/builtins/fonts/default.font\\\"\\n"
+  "text: \\\"Turn Ready!!\\\"\\n"
+  "font: \\\"/assets/Font/FatPixel.font\\\"\\n"
   "material: \\\"/builtins/fonts/label-df.material\\\"\\n"
   "\"\n"
   "}\n"
   ""
   position {
-    x: 456.0
-    y: -338.0
+    x: 170.0
+    y: -450.0
   }
 }
 embedded_instances {
@@ -1363,8 +1239,8 @@ embedded_instances {
   "    index: 0\\n"
   "    count: 3\\n"
   "  }\\n"
-  "  data: 63.218243\\n"
-  "  data: 16.410301\\n"
+  "  data: 165.50638\\n"
+  "  data: 26.101864\\n"
   "  data: 10.0\\n"
   "}\\n"
   "\"\n"
@@ -1377,7 +1253,7 @@ embedded_instances {
   "  y: 32.0\\n"
   "}\\n"
   "text: \\\"Start Building\\\"\\n"
-  "font: \\\"/builtins/fonts/default.font\\\"\\n"
+  "font: \\\"/assets/Font/FatPixel.font\\\"\\n"
   "material: \\\"/builtins/fonts/label-df.material\\\"\\n"
   "\"\n"
   "}\n"
@@ -1408,8 +1284,8 @@ embedded_instances {
   "    index: 0\\n"
   "    count: 3\\n"
   "  }\\n"
-  "  data: 63.218243\\n"
-  "  data: 16.410301\\n"
+  "  data: 71.55391\\n"
+  "  data: 18.403358\\n"
   "  data: 10.0\\n"
   "}\\n"
   "\"\n"
@@ -1422,7 +1298,7 @@ embedded_instances {
   "  y: 32.0\\n"
   "}\\n"
   "text: \\\"Fight!\\\"\\n"
-  "font: \\\"/builtins/fonts/default.font\\\"\\n"
+  "font: \\\"/assets/Font/FatPixel.font\\\"\\n"
   "material: \\\"/builtins/fonts/label-df.material\\\"\\n"
   "\"\n"
   "}\n"

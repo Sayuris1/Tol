@@ -41,7 +41,12 @@ embedded_instances {
   "}\n"
   ""
   position {
-    y: 127.0
+    y: 235.0
+  }
+  scale3 {
+    x: 2.0
+    y: 2.0
+    z: 2.0
   }
 }
 embedded_instances {
@@ -89,7 +94,12 @@ embedded_instances {
   "}\n"
   ""
   position {
-    y: -72.0
+    y: -189.0
+  }
+  scale3 {
+    x: 2.0
+    y: 2.0
+    z: 2.0
   }
 }
 embedded_instances {
@@ -106,7 +116,7 @@ embedded_instances {
   "  y: 32.0\\n"
   "}\\n"
   "text: \\\"10\\\"\\n"
-  "font: \\\"/builtins/fonts/default.font\\\"\\n"
+  "font: \\\"/assets/Font/FatPixel.font\\\"\\n"
   "material: \\\"/builtins/fonts/label-df.material\\\"\\n"
   "\"\n"
   "  position {\n"

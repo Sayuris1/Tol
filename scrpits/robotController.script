@@ -55,6 +55,9 @@ function add_circle(self, circle_type)
 	circle_url.fragment= "circleController"
 	circles_table[#circles_table+1] = {circle = circle_url, touch_pos = {}, circle_type = circle_type}
 
+	local circle_sprite = msg.url(circle)
+	circle_sprite.fragment= "sprite"
+
 	local pos = 13.7 * #circles_table
 
 	go.set_position(self.move_vector * pos, circle)
@@ -66,6 +69,7 @@ function add_circle(self, circle_type)
 
 		add_auto_shields(self)
 
+		go.set(circle_sprite, "tint", vmath.vector4(0.3, 0.5, 0.2, 1))
 	elseif circle_type == 2 then
 		local weapon = factory.create("#weapon_factory", vmath.vector3(0), nil, {team_index = self.team_index, dir = 1})
 		go.set_parent(weapon, circle)
@@ -75,6 +79,8 @@ function add_circle(self, circle_type)
 
 		self.disable_list[#self.disable_list+1] = weapon
 
+		go.set(circle_sprite, "tint", vmath.vector4(0.9, 0.4, 0.0, 1))
+
 	elseif circle_type == 3 then
 		local weapon = factory.create("#weapon_factory", vmath.vector3(0), nil, {team_index = self.team_index, dir = -1})
 		go.set_parent(weapon, circle)
@@ -83,6 +89,8 @@ function add_circle(self, circle_type)
 		self.right_weapons = self.right_weapons + 1
 
 		self.disable_list[#self.disable_list+1] = weapon
+
+		go.set(circle_sprite, "tint", vmath.vector4(0.9, 0.4, 0.0, 1))
 
 	elseif circle_type == 4 then
 		local shield = factory.create("#shield_factory", nil, nil, {team_index = self.team_index, parent = circle_url})
@@ -98,6 +106,8 @@ function add_circle(self, circle_type)
 		self.current_cycles_without_shield = 0
 
 		self.disable_list[#self.disable_list+1] = shield
+
+		go.set(circle_sprite, "tint", vmath.vector4(0.4, 0.0, 0.8, 1))
 	end
 
 	update_speed_circles(self.speed, self.team_index)
