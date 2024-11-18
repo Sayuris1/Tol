@@ -47,30 +47,32 @@ local function add_auto_shields(self)
 	label.set_text("/shield_coverage#label", "Shield Covered Area: " .. percentile .. "%")
 end
 
-function add_circle(self, circle_type)
-	if circle_type == 1 then
-		if self.current_money < 5 then
-			return
-		else
-			self.current_money = self.current_money - 5
-		end
-	elseif circle_type == 2 then
-		if self.current_money < 15 then
-			return
-		else
-			self.current_money = self.current_money - 15
-		end
-	elseif circle_type == 3 then
-		if self.current_money < 20 then
-			return
-		else
-			self.current_money = self.current_money - 20
-		end
-	elseif circle_type == 4 then
-		if self.current_money < 8 then
-			return
-		else
-			self.current_money = self.current_money - 8
+function add_circle(self, circle_type, ignore_money)
+	if not ignore_money then
+		if circle_type == 1 then
+			if self.current_money < 5 then
+				return
+			else
+				self.current_money = self.current_money - 5
+			end
+		elseif circle_type == 2 then
+			if self.current_money < 15 then
+				return
+			else
+				self.current_money = self.current_money - 15
+			end
+		elseif circle_type == 3 then
+			if self.current_money < 20 then
+				return
+			else
+				self.current_money = self.current_money - 20
+			end
+		elseif circle_type == 4 then
+			if self.current_money < 8 then
+				return
+			else
+				self.current_money = self.current_money - 8
+			end
 		end
 	end
 
@@ -145,7 +147,7 @@ function add_circle(self, circle_type)
 	update_speed_circles(self.speed, self.team_index)
 	go.set(circle_url, "enabled", false)
 
-	if self.team_index == hidden_index then
+ 	if self.team_index == hidden_index then
 		for _, value in ipairs(self.disable_list) do
 			msg.post(value, "disable")
 		end
@@ -159,6 +161,7 @@ go.property("type_one_speed", 10)
 go.property("team_index", 1)
 
 function init(self)
+	game_started = false
 	bullets = {}
 
 	local pos_sign = self.team_index == 1 and 1 or -1
@@ -178,6 +181,12 @@ function init(self)
 
 	self.start_money = 108
 	self.current_money = 108
+
+	for i = 1, math.random(3, 20), 1 do
+		add_circle(self, math.random(4), true)
+	end
+
+	msg.post('.', "enable_all_circles")
 end
 
 function final(self)
@@ -335,8 +344,10 @@ function on_message(self, message_id, message, sender)
 			replace_index = 4
 		end
 
-		for _, value in ipairs(circles[replace_index]) do
-			add_circle(self, value.circle_type)
+		if self.team_index ~= hidden_index then
+			for _, value in ipairs(circles[replace_index]) do
+				add_circle(self, value.circle_type, true)
+			end
 		end
 
 		if self.team_index == hidden_index then
@@ -349,6 +360,83 @@ function on_message(self, message_id, message, sender)
 	elseif message_id == hash("visual_done") then
 		for _, value in ipairs(self.disable_list) do
 			msg.post(value, "disable")
+		end
+
+	elseif message_id == hash("visual_done_create") then
+		local replace_index
+		if self.team_index == 1 then
+			replace_index = 3
+		else
+			replace_index = 4
+		end
+
+		if self.team_index == hidden_index then
+			for _, value in ipairs(circles[replace_index]) do
+				add_circle(self, value.circle_type, true)
+			end
+		end
+
+	elseif message_id == hash("reset_start_sim") then
+		for _, value in ipairs(self.disable_list) do
+			if go.exists(value) then
+				go.delete(value, true)
+			end
+		end
+		self.disable_list = {}
+
+		for key, value in pairs(bullets) do
+			if go.exists(key) then
+				go.delete(key, true)
+			end
+		end
+		bullets = {}
+
+		for i = 1, math.random(3, 20), 1 do
+			add_circle(self, math.random(4), true)
+		end
+
+		msg.post('.', "enable_all_circles")
+
+	elseif message_id == hash("start_game") then
+		for _, value in ipairs(self.disable_list) do
+			if go.exists(value) then
+				go.delete(value, true)
+			end
+		end
+		self.disable_list = {}
+
+		for key, value in pairs(bullets) do
+			if go.exists(key) then
+				go.delete(key, true)
+			end
+		end
+
+		game_started = true
+		bullets = {}
+
+		local pos_sign = self.team_index == 1 and 1 or -1
+		go.set_position(vmath.vector3(-940 * pos_sign, 520, 0))
+
+		self.move_vector = vmath.vector3(pos_sign, -1, 0)
+		self.move_vector = vmath.normalize(self.move_vector)
+
+		self.current_cycles_without_shield = 0
+		self.shield_per_circle = 0
+
+		self.left_weapons = 0
+		self.right_weapons = 0
+		self.alignment_angle = 45
+
+		self.disable_list = {}
+
+		self.start_money = 108
+		self.current_money = 108
+
+		self.speed = 250
+		if self.team_index == hidden_index then
+			label.set_text("/text_remaining_money", "Remaining: " .. self.current_money .. "$")
+		else
+			label.set_text("/visual_remaining_money", "Remaining: " .. self.current_money .. "$")
 		end
 	end
 end

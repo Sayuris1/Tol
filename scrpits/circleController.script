@@ -24,7 +24,7 @@ local function add_touchPos(table, pos)
 end
 
 function init(self)
-	self.circles_table =  circles[self.team_index];
+	self.circles_table = circles[self.team_index];
 
 	self.enabled = false
 

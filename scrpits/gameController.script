@@ -58,7 +58,6 @@ function init(self)
 	msg.post(msg.url(nil, "/weapon_right_up_down/script", "buttonController"), "money_label", {label = "/weapon_right_text#label1"})
 
 	msg.post("/timer", "disable")
-
 end
 
 function final(self)
@@ -73,24 +72,33 @@ function update(self, dt)
 		label.set_text("/timer#label", string.format('%.02f', self.current_play_time))
 
 		if self.current_play_time <= 0 then
-			msg.post("/timer", "disable")
+			if game_started then
+				msg.post("/timer", "disable")
 
-			if circles[visiable_index].size < circles[hidden_index].size then
-				self.player2 = self.player2 + 1
-			elseif circles[visiable_index].size == circles[hidden_index].size then
-				self.player1 = self.player1 + 1
-				self.player2 = self.player2 + 1
+				if circles[visiable_index].size < circles[hidden_index].size then
+					self.player2 = self.player2 + 1
+				elseif circles[visiable_index].size == circles[hidden_index].size then
+					self.player1 = self.player1 + 1
+					self.player2 = self.player2 + 1
+				else
+					self.player1 = self.player1 + 1
+				end
+
+				msg.post("won_state", "enable")
+
+				label.set_text("won_state#player1", self.player1)
+				label.set_text("won_state#player2", self.player2)
+
+				self.runing = false
+				self.current_play_time = self.play_time
 			else
-				self.player1 = self.player1 + 1
+				circles = {{}, {}, {}, {}}
+
+				msg.post(self.url_robot1, "reset_start_sim")
+				msg.post(self.url_robot2, "reset_start_sim")
+
+				self.current_play_time = self.play_time
 			end
-
-			msg.post("won_state", "enable")
-
-			label.set_text("won_state#player1", self.player1)
-			label.set_text("won_state#player2", self.player2)
-
-			self.runing = false
-			self.current_play_time = self.play_time
 		end
 	end
 end
@@ -132,6 +140,7 @@ function on_message(self, message_id, message, sender)
 		label.set_text("/start_other_turn#label", "Start Building")
 
 		msg.post(self.url_robot1, "visual_done")
+		msg.post(self.url_robot2, "visual_done_create")
 
 	elseif message_id == hash("start_other_turn") then
 		for _, value in ipairs(self.text_tools) do
@@ -154,6 +163,22 @@ function on_message(self, message_id, message, sender)
 		msg.post("/fight", "disable")
 
 		msg.post("/shield_up_down/script#buttonController", "reset")
+
+	elseif message_id == hash("start_game") then
+		circles = {{}, {}, {}, {}}
+
+		msg.post(self.url_robot1, "start_game")
+		msg.post(self.url_robot2, "start_game")
+
+		self.current_play_time = self.play_time
+		self.runing = false
+
+		msg.post("/timer", "disable")
+		msg.post("/start_game", "disable")
+
+		for _, value in ipairs(self.visual_tools) do
+			msg.post(value, "enable")
+		end
 	end
 end
 

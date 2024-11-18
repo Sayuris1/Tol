@@ -23,6 +23,12 @@ end
 
 function fixed_update(self, dt)
 	local url = msg.url(go.get_parent())
+
+--[[ 	if url.path == hash("/robot1") or url.path == hash("/robot2") then
+		go.delete()
+		return;
+	end ]]
+
 	url.fragment = "circleController"
 
 	if not go.get(url, "enabled") then

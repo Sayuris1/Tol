@@ -109,6 +109,9 @@ function on_message(self, message_id, message, sender)
 
 		elseif message.id == hash("/won_state") then
 			msg.post("/game_controller#gameController", "build_state")
+
+		elseif message.id == hash("/start_game") then
+			msg.post("/game_controller#gameController", "start_game")
 		end
 	end
 end
