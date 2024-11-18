@@ -1,10 +1,15 @@
 go.property("value", 0)
+go.property("cost", 5)
 
 local function add_to_value(self, add)
 	self.value = self.value + add
 	self.value = math.max(0, self.value)
 
 	label.set_text("#label", self.value)
+
+	if self.money_label then
+		label.set_text(self.money_label, self.value * self.cost .. "$")
+	end
 end
 
 function init(self)
@@ -40,6 +45,8 @@ function on_message(self, message_id, message, sender)
 	elseif message_id == hash("reset") then
 		self.value = 0
 		label.set_text("#label", self.value)
+	elseif message_id == hash("money_label") then
+		self.money_label = message.label
 	end
 end
 

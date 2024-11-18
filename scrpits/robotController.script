@@ -48,6 +48,38 @@ local function add_auto_shields(self)
 end
 
 function add_circle(self, circle_type)
+	if circle_type == 1 then
+		if self.current_money < 5 then
+			return
+		else
+			self.current_money = self.current_money - 5
+		end
+	elseif circle_type == 2 then
+		if self.current_money < 15 then
+			return
+		else
+			self.current_money = self.current_money - 15
+		end
+	elseif circle_type == 3 then
+		if self.current_money < 20 then
+			return
+		else
+			self.current_money = self.current_money - 20
+		end
+	elseif circle_type == 4 then
+		if self.current_money < 8 then
+			return
+		else
+			self.current_money = self.current_money - 8
+		end
+	end
+
+	if self.team_index == hidden_index then
+		label.set_text("/text_remaining_money", "Remaining: " .. self.current_money .. "$")
+	else
+		label.set_text("/visual_remaining_money", "Remaining: " .. self.current_money .. "$")
+	end
+
 	local circles_table = circles[self.team_index];
 
 	local circle = factory.create("#circle_factory", nil, nil, {speed = self.init_speed, index = #circles_table+1, team_index = self.team_index, circle_type = circle_type, parent = msg.url(), move_vector = self.move_vector}, 0.1)
@@ -143,6 +175,9 @@ function init(self)
 	self.alignment_angle = 45
 
 	self.disable_list = {}
+
+	self.start_money = 108
+	self.current_money = 108
 end
 
 function final(self)
@@ -180,8 +215,15 @@ function on_message(self, message_id, message, sender)
 		go.set("/game_controller#gameController", "runing", true)
 		self.shield_per_circle = 0
 
+		self.start_money = math.floor(self.start_money * 1.7)
+		self.current_money = self.start_money
+
 	elseif message_id == hash("add_speed") then
 		if message.value then
+				if self.current_money < 5 * go.get(message.value, "value") then
+					return
+				end
+
 				for i = 1, go.get(message.value, "value"), 1 do
 					add_circle(self, 1)
 				end
@@ -193,6 +235,10 @@ function on_message(self, message_id, message, sender)
 
 	elseif message_id == hash("add_weapon_right") then
 		if message.value then
+				if self.current_money < 20 * go.get(message.value, "value") then
+					return
+				end
+
 				for i = 1, go.get(message.value, "value"), 1 do
 					add_circle(self, 3)
 				end
@@ -203,6 +249,10 @@ function on_message(self, message_id, message, sender)
 
 	elseif message_id == hash("add_weapon_left") then
 		if message.value then
+				if self.current_money < 15 * go.get(message.value, "value") then
+					return
+				end
+
 				for i = 1, go.get(message.value, "value"), 1 do
 					add_circle(self, 2)
 				end
@@ -219,6 +269,18 @@ function on_message(self, message_id, message, sender)
 		add_circle(self, 4)
 
 	elseif message_id == hash("up_move_vector") then
+		if self.current_money < 2 then
+			return
+		else
+			self.current_money = self.current_money - 2
+		end
+
+		if self.team_index == hidden_index then
+			label.set_text("/text_remaining_money", "Remaining: " .. self.current_money .. "$")
+		else
+			label.set_text("/visual_remaining_money", "Remaining: " .. self.current_money .. "$")
+		end
+
 		self.move_vector = vmath.rotate(vmath.quat_rotation_z(math.rad(5)), self.move_vector)
 		update_move_vectors(self.move_vector, self.team_index)
 
@@ -226,6 +288,18 @@ function on_message(self, message_id, message, sender)
 		label.set_text("alignment#label", "Alignment Angle: " .. self.alignment_angle)
 
 	elseif message_id == hash("down_move_vector") then
+		if self.current_money < 3 then
+			return
+		else
+			self.current_money = self.current_money - 3
+		end
+
+		if self.team_index == hidden_index then
+			label.set_text("/text_remaining_money", "Remaining: " .. self.current_money .. "$")
+		else
+			label.set_text("/visual_remaining_money", "Remaining: " .. self.current_money .. "$")
+		end
+
 		self.move_vector = vmath.rotate(vmath.quat_rotation_z(math.rad(-5)), self.move_vector)
 		update_move_vectors(self.move_vector, self.team_index)
 

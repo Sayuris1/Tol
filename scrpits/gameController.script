@@ -32,21 +32,33 @@ function init(self)
 		"/tuto_text", "/weapon_left_text", "weapon_right_text",
 
 		"/total_speed", "/shield_coverage", "/left_weapons", "/right_weapons",
-		"/alignment", "/text_done"
+		"/alignment", "/text_done", "/text_remaining_money"
 	}
 
 	self.visual_tools =
 	{
 		"/shield", "/speed", "/visual_done", "/vector_down", "/vector_up",
-		"/weapon_left", "weapon_right"
+		"/weapon_left", "/weapon_right", "/visual_remaining_money"
 	}
 
 	for _, value in ipairs(self.text_tools) do
 		msg.post(value, "disable")
 	end
 
+	for _, value in ipairs(self.visual_tools) do
+		msg.post(value, "disable")
+	end
+
 	msg.post("/start_other_turn", "disable")
 	msg.post("/fight", "disable")
+
+	msg.post(msg.url(nil, "/shield_up_down/script", "buttonController"), "money_label", {label = false})
+	msg.post(msg.url(nil, "/speed_up_down/script", "buttonController"), "money_label", {label = "/speed_text#label1"})
+	msg.post(msg.url(nil, "/weapon_left_up_down/script", "buttonController"), "money_label", {label = "/weapon_left_text#label1"})
+	msg.post(msg.url(nil, "/weapon_right_up_down/script", "buttonController"), "money_label", {label = "/weapon_right_text#label1"})
+
+	msg.post("/timer", "disable")
+
 end
 
 function final(self)
@@ -54,9 +66,15 @@ end
 
 function update(self, dt)
 	if self.runing then
+		msg.post("/timer", "enable")
+
 		self.current_play_time = self.current_play_time - dt
 
+		label.set_text("/timer#label", string.format('%.02f', self.current_play_time))
+
 		if self.current_play_time <= 0 then
+			msg.post("/timer", "disable")
+
 			if circles[visiable_index].size < circles[hidden_index].size then
 				self.player2 = self.player2 + 1
 			elseif circles[visiable_index].size == circles[hidden_index].size then
