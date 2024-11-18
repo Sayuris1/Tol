@@ -48,7 +48,7 @@ local function add_auto_shields(self)
 end
 
 function add_circle(self, circle_type)
-	local circles_table =  circles[self.team_index];
+	local circles_table = circles[self.team_index];
 
 	local circle = factory.create("#circle_factory", nil, nil, {speed = self.init_speed, index = #circles_table+1, team_index = self.team_index, circle_type = circle_type, parent = msg.url(), move_vector = self.move_vector}, 0.1)
 	local circle_url = msg.url(circle)
@@ -263,6 +263,13 @@ function on_message(self, message_id, message, sender)
 
 		for _, value in ipairs(circles[replace_index]) do
 			add_circle(self, value.circle_type)
+		end
+
+		if self.team_index == hidden_index then
+			label.set_text("/total_speed#label", "Total Speed: " .. self.speed)
+			label.set_text("/right_weapons#label", "Total Right Weapons: " .. self.right_weapons)
+			label.set_text("left_weapons#label", "Total Left Weapons: " .. self.left_weapons)
+			label.set_text("alignment#label", "Alignment Angle: " .. self.alignment_angle)
 		end
 
 	elseif message_id == hash("visual_done") then

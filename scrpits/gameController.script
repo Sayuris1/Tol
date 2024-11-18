@@ -4,6 +4,7 @@ go.property("runing", false)
 function init(self)
 	circles = {{}, {}}
 	hidden_index = 2
+	visiable_index = 1
 
 	self.current_play_time = self.play_time
 
@@ -56,9 +57,9 @@ function update(self, dt)
 		self.current_play_time = self.current_play_time - dt
 
 		if self.current_play_time <= 0 then
-			if circles[1].size < circles[2].size then
+			if circles[visiable_index].size < circles[hidden_index].size then
 				self.player2 = self.player2 + 1
-			elseif circles[1].size == circles[2].size then
+			elseif circles[visiable_index].size == circles[hidden_index].size then
 				self.player1 = self.player1 + 1
 				self.player2 = self.player2 + 1
 			else
@@ -86,8 +87,10 @@ function on_message(self, message_id, message, sender)
 
 		if hidden_index == 2 then
 			hidden_index = 1
+			visiable_index = 2
 		else
 			hidden_index = 2
+			visiable_index = 1
 		end
 
 		msg.post(self.url_robot1, "build_state")
@@ -100,6 +103,8 @@ function on_message(self, message_id, message, sender)
 		end
 
 		self.url_robot1, self.url_robot2 = self.url_robot2, self.url_robot1
+		self.player1, self.player2 = self.player2, self.player1
+
 	elseif message_id == hash("visual_done") then
 		for _, value in ipairs(self.visual_tools) do
 			msg.post(value, "disable")

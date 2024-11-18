@@ -10,4 +10,7 @@ images {
 images {
   image: "/assets/pngs/pozitive.png"
 }
+images {
+  image: "/assets/pngs/weapon.png"
+}
 extrude_borders: 2

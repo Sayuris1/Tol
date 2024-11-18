@@ -35,7 +35,13 @@ function fixed_update(self, dt)
 		local dir = go.get(url, "move_vector")
 		dir = vmath.rotate(vmath.quat_rotation_z(math.rad(45 * self.dir)), dir)
 
-		bullets[factory.create("#bullet_factory", nil, nil, nil, 3)] = {move = self.bullet_speed * dir, team_index = self.team_index}
+		local bullet = factory.create("#bullet_factory", nil, nil, nil, 0.4)
+		bullets[bullet] = {move = self.bullet_speed * dir, team_index = self.team_index}
+
+		local bullet_url = msg.url(bullet)
+		bullet_url.fragment = "sprite"
+
+		go.set(bullet_url, "tint", vmath.vector4(0.8, 0.2, 0.2, 1))
 
 		self.current_fire_interval = self.fire_interval
 	end
